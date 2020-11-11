@@ -10,6 +10,7 @@ django = "*"
 flake8 = "*"
 gunicorn = "*"
 zvi-client = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
