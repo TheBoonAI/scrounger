@@ -2,14 +2,14 @@ import { fireEvent, render, screen } from '@testing-library/react'
 
 import Login from '..'
 
-// mocks out Authentication helpers import in Login.js
+// mocks out '../Authentication/helpers' import in Login.js
 jest.mock('../../Authentication/helpers')
 
 describe('<Login />', () => {
   test('allows the user to log in', () => {
     const mockLogin = jest.fn()
 
-    // replaces real Authentication helpers with '../../Authentication/__mocks__/helpers' in Login.js
+    // replaces '../Authentication/helpers' with '../Authentication/__mocks__/helpers' in Login.js
     require('../../Authentication/helpers').__setMockLogin(mockLogin)
 
     render(<Login />)
