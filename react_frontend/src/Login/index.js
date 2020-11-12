@@ -26,11 +26,12 @@ const Login = () => {
           method="post"
           onSubmit={(event) => event.preventDefault()}
         >
-          {!!error && (
-            <div className="pt-1 pb-2 text-red-600 font-normal italic">
-              <span>{error}</span>
-            </div>
-          )}
+          <div
+            role="alert"
+            className="pt-1 pb-2 text-red-600 font-normal italic"
+          >
+            {error || <>&nbsp;</>}
+          </div>
 
           <Input
             label="Username"

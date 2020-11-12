@@ -14,7 +14,7 @@ const Search = () => {
 
   return (
     <form
-      className="py-0 max-w-sm md:max-w-lg flex pt-4 md:pt-0 bg-gray-900 w-full "
+      className="py-0 sm:max-w-sm md:max-w-lg flex pt-4 md:pt-0 bg-gray-900 w-full "
       onSubmit={(event) => event.preventDefault()}
     >
       <input
@@ -31,7 +31,7 @@ const Search = () => {
       <button
         aria-label="Search"
         title="Search"
-        className="px-3 hover:text-green-500"
+        className="p-2 sm:p-3 self-center ml-2 hover:text-green-500 hover:bg-gray-800 rounded-full"
         type="submit"
         onClick={() =>
           Router.push(
