@@ -52,7 +52,7 @@ export const logout = async () => {
     },
   })
 
-  mutate('/api/v1/me/', {}, false)
+  mutate('/api/v1/me', {}, false)
 
   cache.clear()
 
