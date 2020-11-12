@@ -10,9 +10,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
   const { id, name, path, type } = assets[assetIndex] || {}
 
   const keydownHandler = useCallback(
-    (event) => {
-      const { code } = event
-
+    ({ code }) => {
       if (code === 'ArrowLeft') {
         setAssetIndex((assetIndex + assets.length - 1) % assets.length)
       }

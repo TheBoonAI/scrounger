@@ -62,6 +62,7 @@ const Assets = () => {
                     src={`/api/v1/assets/${id}/thumbnail_file/`}
                     alt={name}
                   />
+
                   {['image', 'document'].includes(type) && (
                     <link
                       rel="preload"
@@ -69,6 +70,7 @@ const Assets = () => {
                       href={`/api/v1/assets/${id}/highres_file/`}
                     />
                   )}
+
                   {type === 'video' && (
                     <span className="absolute bottom-0 right-0 border-2 m-2 p-2 rounded-full">
                       <svg
