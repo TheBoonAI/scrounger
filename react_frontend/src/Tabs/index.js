@@ -32,7 +32,7 @@ const Tabs = () => {
               })}`,
             )
           }
-          className={`px-1 sm:px-4 py-2 border-b-2 border-transparent ${
+          className={`px-2 sm:px-4 py-2 border-b-2 border-transparent hover:bg-gray-800 rounded-t-lg ${
             t === key && 'text-green-500 border-green-500'
           }`}
         >

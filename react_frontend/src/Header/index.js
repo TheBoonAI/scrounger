@@ -7,7 +7,7 @@ import Pagination from '../Pagination'
 
 const Header = () => {
   return (
-    <div className="bg-gray-900 w-full px-4 flex flex-col items-center">
+    <div className="bg-gray-900 w-full px-2 xl:px-4 flex flex-col items-center">
       <div className="flex flex-row flex-wrap sm:flex-no-wrap justify-between py-4 w-full">
         <h1 className="flex flex-col leading-none text-xl pr-2">
           Scrounger
@@ -23,7 +23,7 @@ const Header = () => {
         <Search />
       </div>
 
-      <div className="flex justify-between w-full max-w-screen-xl">
+      <div className="flex xl:px-2 justify-between w-full max-w-screen-xl">
         <Tabs />
         <Pagination />
       </div>

@@ -45,7 +45,7 @@ const Pagination = () => {
           const page = +p > 2 ? { p: +p - 1 } : { p: '' }
           Router.push(`${pathname}${getQueryString({ ...query, ...page })}`)
         }}
-        className={`border-2 rounded-full mr-1 ${
+        className={`border-2 ml-2 rounded-full mr-1 ${
           count === 0 || p <= 1
             ? 'text-gray-700 border-gray-700 cursor-not-allowed'
             : 'hover:text-green-500 hover:border-green-500'
@@ -53,7 +53,7 @@ const Pagination = () => {
       >
         <svg
           viewBox="0 0 20 20"
-          className="h-8 w-8 transform rotate-90 fill-current"
+          className="h-6 sm:h-7 transform rotate-90 fill-current"
         >
           <path d="M14.243 7.586L10 11.828 5.757 7.586 4.343 9 10 14.657 15.657 9l-1.414-1.414z" />
         </svg>
@@ -67,7 +67,7 @@ const Pagination = () => {
         onClick={() =>
           Router.push(`${pathname}${getQueryString({ ...query, p: +p + 1 })}`)
         }
-        className={`border-2 rounded-full ${
+        className={`border-2 ml-2 rounded-full ${
           count === 0 || p >= maxPages
             ? 'text-gray-700 border-gray-700 cursor-not-allowed'
             : 'hover:text-green-500 hover:border-green-500'
@@ -75,7 +75,7 @@ const Pagination = () => {
       >
         <svg
           viewBox="0 0 20 20"
-          className="h-8 w-8 transform -rotate-90 fill-current"
+          className="h-6 sm:h-7 transform -rotate-90 fill-current"
         >
           <path d="M14.243 7.586L10 11.828 5.757 7.586 4.343 9 10 14.657 15.657 9l-1.414-1.414z" />
         </svg>
