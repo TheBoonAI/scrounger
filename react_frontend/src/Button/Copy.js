@@ -9,7 +9,7 @@ const ButtonCopy = ({ text }) => {
   return (
     <button
       type="button"
-      className="p-4 rounded bg-gray-800 hover:bg-gray-700 flex items-center mr-2"
+      className="p-4 rounded bg-gray-800 hover:bg-gray-700 flex items-center mr-2 mb-2 whitespace-no-wrap"
       title="Copy text to clipboard"
       aria-label="Copy text to clipboard"
       onClick={setCopied}
