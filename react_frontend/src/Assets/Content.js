@@ -45,7 +45,7 @@ const Assets = () => {
 
       <div className="w-screen max-w-screen-xl h-full">
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 p-1">
-          {assets.map(({ id, name }, index) => {
+          {assets.map(({ id, name, type }, index) => {
             return (
               <div
                 key={id}
@@ -62,6 +62,24 @@ const Assets = () => {
                     src={`/api/v1/assets/${id}/thumbnail_file/`}
                     alt={name}
                   />
+                  {['image', 'document'].includes(type) && (
+                    <link
+                      rel="preload"
+                      as="image"
+                      href={`/api/v1/assets/${id}/highres_file/`}
+                    />
+                  )}
+                  {type === 'video' && (
+                    <span className="absolute bottom-0 right-0 border-2 m-2 p-2 rounded-full">
+                      <svg
+                        className="fill-current h-2"
+                        viewBox="0 0 20 20"
+                        style={{ marginLeft: 1, marginRight: -1 }}
+                      >
+                        <path d="M20 10L0 20V0z" />
+                      </svg>
+                    </span>
+                  )}
                 </button>
               </div>
             )
