@@ -79,6 +79,12 @@
   "jest": {
     "setupFiles": [
       "./jest.setup.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.*/__mocks__"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
     ]
   }
 }
