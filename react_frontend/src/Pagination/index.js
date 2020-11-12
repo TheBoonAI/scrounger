@@ -8,8 +8,10 @@ const Pagination = () => {
   const {
     pathname,
     query,
-    query: { p = 1, t, q },
+    query: { p = 1, t, q, s = '[]' },
   } = useRouter()
+
+  const similarityQuery = JSON.parse(s)
 
   const { data } = useSWR(
     `/assets${getQueryString({
@@ -17,6 +19,7 @@ const Pagination = () => {
       size: ASSETS_PER_PAGE,
       text_search: q,
       media_type: t,
+      similarity_search: similarityQuery.join(','),
     })}`,
     { suspense: false },
   )
@@ -32,7 +35,7 @@ const Pagination = () => {
           <p className="hidden sm:block">
             {p} of {maxPages}
           </p>
-          <div className="w-3" />
+          <div className="w-3 hidden sm:block" />
         </>
       )}
 
@@ -42,7 +45,9 @@ const Pagination = () => {
         title="Go to previous page"
         disabled={count === 0 || p <= 1}
         onClick={() => {
+          // Only add 'p` to url query if not page 1
           const page = +p > 2 ? { p: +p - 1 } : { p: '' }
+
           Router.push(`${pathname}${getQueryString({ ...query, ...page })}`)
         }}
         className={`border-2 ml-2 rounded-full mr-1 ${
@@ -64,9 +69,9 @@ const Pagination = () => {
         aria-label="Go to next page"
         title="Go to next page"
         disabled={count === 0 || p >= maxPages}
-        onClick={() =>
+        onClick={() => {
           Router.push(`${pathname}${getQueryString({ ...query, p: +p + 1 })}`)
-        }
+        }}
         className={`border-2 ml-2 rounded-full ${
           count === 0 || p >= maxPages
             ? 'text-gray-700 border-gray-700 cursor-not-allowed'
