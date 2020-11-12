@@ -20,9 +20,6 @@ describe('<Login />', () => {
       target: { value: 'mockPassword' },
     })
 
-    expect(screen.getAllByDisplayValue('mockUsername')).toHaveLength(1)
-    expect(screen.getAllByDisplayValue('mockPassword')).toHaveLength(1)
-
     fireEvent.click(screen.getByText('Sign In'))
 
     expect(mockLogin.mock.calls[0][0].username).toEqual('mockUsername')
