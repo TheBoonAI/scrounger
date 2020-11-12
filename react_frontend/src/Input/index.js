@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 const Input = ({ type, label, value, onChange }) => {
   return (
-    <div className="w-full mb-4">
+    <div className="w-full">
       <label className="text-sm font-bold mb-2">
         {label}
         <input
@@ -17,7 +17,7 @@ const Input = ({ type, label, value, onChange }) => {
 }
 
 Input.propTypes = {
-  type: PropTypes.oneOf(['text', 'password', 'number']).isRequired,
+  type: PropTypes.oneOf(['text', 'password', 'number', 'search']).isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

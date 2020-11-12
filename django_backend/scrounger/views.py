@@ -125,7 +125,9 @@ def search_view(request):
         size: Number of search results to return. To be used with the "from" query param
          for pagination.
         text_search: String of search terms to return matching assets for.
-        similarity_search: Comma-separated list of asset IDs to return similar assets for.
+        similarity_search: List of asset IDs to return similar assets for.
+        media_type: List of media types to filter by. Valid entries are "video", "image",
+         and "document".
 
     Sample Response:
     {
@@ -135,16 +137,17 @@ def search_view(request):
                 "name": "DogsAndCats.mp4",
                 "path": "gs://my-pets-bucket/videos/DogsAndCats.mp4"
             }
-        ]
+        ],
+        "count": 1
     }
 
     """
-
     # The "search" variable holds an Elasticsearch query. The empty dictionary is a blank
     # search and will return all assets. The query params passed to this view will be used
     # to update this query before finally being sent to elasticsearch to fetch results.
     search = {}
-    queries = []
+    must_queries = []
+    filter = None
 
     # Check for query params related to pagination and update the search query accordingly.
     # More info can be found at https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html.
@@ -158,7 +161,7 @@ def search_view(request):
     # later. More info on the simple query string can be found here
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html.
     if request.GET.get('text_search'):
-        queries.append({
+        must_queries.append({
             'simple_query_string': {
                 'query': request.GET.get('text_search')
             }
@@ -176,31 +179,45 @@ def search_view(request):
             simhash = app.assets.get_asset(asset_id).get_attr('analysis.zvi-image-similarity.simhash')
             simhashes.append(simhash)
         sim_query = zmlp.SimilarityQuery(simhashes)
-        queries.append(sim_query)
+        must_queries.append(sim_query)
 
-    # If there are any query blocks created from the query params they are added to the
-    # "query" section of the search query. The queries are added to a "bool" query in a "must" clause.
-    # The "must" clause tells Elasticsearch that all queries must be true for an asset to
-    # be returned in the search. The Elasticsearch search query is complete and ready to be
-    # sent to the server. More info on the bool/must syntax can be found at
-    # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html.
-    if queries:
-        search['query'] = {
-            'bool': {
-                'must': queries
+    # Filter by file type.
+    if request.GET.get('media_type'):
+        filter = [{
+            'terms': {
+                "media.type": request.GET.getlist('media_type')
             }
-        }
+        }]
+
+    # If there are any must-queries or filters created from the query params they are added to the
+    # "query" section of the search query. The must queries are added to a "bool" query in a "must" clause.
+    # The "must" clause tells Elasticsearch that all queries must be true for an asset to
+    # be returned in the search. The media type filter is added to the "filter" clause and will filter
+    # out any assets that do not match. The Elasticsearch search query is now complete and ready to be
+    # sent to the server. More info on the bool/must/filter syntax can be found at
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html.
+    if must_queries or filter:
+        bool_clause = {}
+        if must_queries:
+            bool_clause['must'] = must_queries
+        if filter:
+            bool_clause['filter'] = filter
+        search['query'] = {'bool': bool_clause}
+
+    print(search)
 
     # Use the search function to send the Elasticsearch search query to the ZMLP server and
     # receive a list of matching assets. The required information for each asset is stored
     # in a dictionary and the list of dictionaries is returned in a json response.
     assets = []
-    for asset in app.assets.search(search=search):
+    results = app.assets.search(search=search)
+    for asset in results:
         assets.append({'name': asset.get_attr('source.filename'),
                        'path': asset.get_attr('source.path'),
                        'type': asset.get_attr('media.type'),
                        'id': asset.id})
-    return JsonResponse({'assets': assets})
+    return JsonResponse({'assets': assets,
+                         'count': results.total_size})
 
 
 @require_GET

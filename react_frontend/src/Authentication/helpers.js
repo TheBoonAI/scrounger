@@ -20,7 +20,7 @@ export const login = ({ username, password, dispatch }) => async (event) => {
 
   dispatch({ error: '' })
 
-  const response = await fetch('/api/v1/login/', {
+  const response = await fetch('/api/v1/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -38,13 +38,13 @@ export const login = ({ username, password, dispatch }) => async (event) => {
 
   const user = await response.json()
 
-  return mutate('/api/v1/me/', user, false)
+  return mutate('/api/v1/me', user, false)
 }
 
 export const logout = async () => {
   const csrftoken = getCsrfToken()
 
-  await fetch('/api/v1/logout/', {
+  await fetch('/api/v1/logout', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',

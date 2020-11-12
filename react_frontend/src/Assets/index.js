@@ -1,5 +1,7 @@
 import Head from 'next/head'
 
+import SuspenseBoundary from '../SuspenseBoundary'
+
 import AssetsContent from './Content'
 
 const Assets = () => {
@@ -9,7 +11,9 @@ const Assets = () => {
         <title>Scrounger</title>
       </Head>
 
-      <AssetsContent />
+      <SuspenseBoundary>
+        <AssetsContent />
+      </SuspenseBoundary>
     </>
   )
 }

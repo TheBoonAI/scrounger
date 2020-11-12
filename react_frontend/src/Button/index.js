@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 
 const VARIANTS = {
-  primary: 'py-2 px-4 rounded bg-green-500 hover:bg-green-700',
+  primary:
+    'h-auto py-2 px-4 rounded bg-green-500 hover:bg-green-700 whitespace-no-wrap',
 }
 
 const Button = ({ variant, onClick, children, ...props }) => {

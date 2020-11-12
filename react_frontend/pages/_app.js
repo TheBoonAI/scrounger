@@ -1,4 +1,5 @@
 import App from 'next/app'
+import { SWRConfig } from 'swr'
 
 import '../styles/tailwind.css'
 
@@ -11,8 +12,20 @@ class MyApp extends App {
 
     return (
       <Authentication>
-        <Header />
-        <Component {...pageProps} />
+        <SWRConfig
+          value={{
+            fetcher: (resource, init) =>
+              fetch(`/api/v1${resource}`, init).then((res) => res.json()),
+            suspense: true,
+          }}
+        >
+          <div className="h-screen">
+            <div className="flex flex-col items-center w-full h-full">
+              <Header />
+              <Component {...pageProps} />
+            </div>
+          </div>
+        </SWRConfig>
       </Authentication>
     )
   }
