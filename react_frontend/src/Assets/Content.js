@@ -59,7 +59,7 @@ const Assets = () => {
                 >
                   <img
                     className="absolute top-0 h-full object-contain"
-                    src={`/api/v1/assets/${id}/thumbnail_file/`}
+                    src={`/api/v1/assets/${id}/thumbnail_file`}
                     alt={name}
                   />
 
