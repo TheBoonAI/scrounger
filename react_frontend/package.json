@@ -1,10 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint '{pages,src}/**/*.js'",
     "start": "next start",
-    "lint": "eslint '{pages,src}/**/*.js'"
+    "test": "jest --watch --notify --verbose --no-cache",
+    "test:cover": "jest --coverage --verbose --no-cache"
   },
   "dependencies": {
     "next": "10.0.1",
@@ -16,6 +18,7 @@
     "tailwindcss": "1.9.6"
   },
   "devDependencies": {
+    "@testing-library/react": "11.1.1",
     "eslint": "7.2.0",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "6.15.0",
@@ -23,6 +26,8 @@
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.0.0",
+    "jest": "26.6.3",
+    "jest-fetch-mock": "3.0.3",
     "prettier": "2.1.2"
   },
   "postcss": {
@@ -63,5 +68,15 @@
     "jsxBracketSameLine": false,
     "arrowParens": "always",
     "proseWrap": "always"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest.setup.js"
+    ]
   }
 }
