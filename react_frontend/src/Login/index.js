@@ -53,7 +53,7 @@ const Login = () => {
           <Button
             variant="primary"
             type="submit"
-            onClick={() => login({ username, password, dispatch })}
+            onClick={login({ username, password, dispatch })}
           >
             Sign In
           </Button>

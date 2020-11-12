@@ -2,7 +2,7 @@ import { login } from '../helpers'
 
 describe('<Authentication /> helpers', () => {
   describe('login', () => {
-    test('properly handles response with 401 status', async () => {
+    test('properly handles responses with a 401 status', async () => {
       fetch.mockResponseOnce(JSON.stringify({}), { status: 401 })
 
       const mockPreventDefault = jest.fn()
