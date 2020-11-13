@@ -4,8 +4,6 @@ from functools import wraps
 import zmlp
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse, Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
@@ -14,7 +12,9 @@ app = zmlp.ZmlpApp(apikey=settings.ZMLP_API_KEY, server=settings.ZMLP_API_URL)
 
 
 def authentication_required(view_func):
-    """View decorator that will return a 401 HTTP status and a blank body if the user is
+    """Decorator for enforcing authentication on views.
+
+    This decorator will return a 401 HTTP status and a blank body if the user is
     not authenticated.
 
     """
@@ -34,7 +34,7 @@ def login_view(request):
     Http Methods: POST
 
     Body Params:
-        username: Username of the person attempting to log in .
+        username: Username of the person attempting to log in.
         password: Password of the person attempting to log in.
 
     Sample Response:
@@ -110,7 +110,9 @@ def me_view(request):
 @require_GET
 @authentication_required
 def search_view(request):
-    """View that accepts a search string and returns matching assets. This view supports
+    """Paginated view for searching for specific assets using a querystring.
+
+    View that accepts a search string and returns matching assets. This view supports
     pagination, text searches and similarity searches. Text searches are simple plain text
     searches that return any asset that has metadata matching the search terms. Similarity
     searches take the ID of one or more assets and return assets that are visually similar.
@@ -151,19 +153,22 @@ def search_view(request):
 
     # Check for query params related to pagination and update the search query accordingly.
     # More info can be found at https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html.
-    if request.GET.get('from'):
-        search['from'] = request.GET.get('from')
-    if request.GET.get('size'):
-        search['size'] = request.GET.get('size')
+    _from = request.GET.get('from')
+    size = request.GET.get('size')
+    if _from:
+        search['from'] = _from
+    if size:
+        search['size'] = size
 
     # Check for a query param with a text search. An Elasticsearch simple query string
     # block is created and added to a list of query blocks that will be added to the search
     # later. More info on the simple query string can be found here
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html.
-    if request.GET.get('text_search'):
+    text_search = request.GET.get('text_search')
+    if text_search:
         must_queries.append({
             'simple_query_string': {
-                'query': request.GET.get('text_search')
+                'query': text_search
             }
         })
 
@@ -173,19 +178,21 @@ def search_view(request):
     # that will create this query. This object accepts a list of similarity hashes. Similarity
     # hashes for all of the assets are gathered and passed to the SimilarityQuery object.
     # The SimilarityQuery is then added to the list of query blocks.
-    if request.GET.get('similarity_search'):
+    similarity_search = request.GET.get('similarity_search')
+    if similarity_search:
         simhashes = []
-        for asset_id in request.GET.getlist('similarity_search'):
+        for asset_id in similarity_search:
             simhash = app.assets.get_asset(asset_id).get_attr('analysis.zvi-image-similarity.simhash')
             simhashes.append(simhash)
         sim_query = zmlp.SimilarityQuery(simhashes)
         must_queries.append(sim_query)
 
     # Filter by file type.
-    if request.GET.get('media_type'):
+    media_type = request.GET.get('media_type')
+    if media_type:
         filter = [{
             'terms': {
-                "media.type": request.GET.getlist('media_type')
+                "media.type": media_type
             }
         }]
 
@@ -203,8 +210,6 @@ def search_view(request):
         if filter:
             bool_clause['filter'] = filter
         search['query'] = {'bool': bool_clause}
-
-    print(search)
 
     # Use the search function to send the Elasticsearch search query to the ZMLP server and
     # receive a list of matching assets. The required information for each asset is stored
