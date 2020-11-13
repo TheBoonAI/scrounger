@@ -50,9 +50,7 @@ const Assets = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 p-1">
         {assets.map(({ id, name, type }, index) => {
-          const simSearchIndex = similarityQuery.findIndex(
-            (simId) => simId === id,
-          )
+          const simIndex = similarityQuery.findIndex((simId) => simId === id)
 
           return (
             <div
@@ -73,24 +71,45 @@ const Assets = () => {
 
                 <button
                   type="button"
-                  title="Find similar images"
+                  title={
+                    simIndex > -1
+                      ? 'Remove from similarity search'
+                      : 'Find similar images'
+                  }
                   aria-label={`Find similar images to ${name}`}
-                  disabled={simSearchIndex > -1}
-                  className={`absolute top-0 right-0 p-2 m-1 rounded-full bg-gray-800 bg-opacity-75 ${
-                    simSearchIndex > -1
-                      ? 'cursor-not-allowed text-green-500'
-                      : 'opacity-0 hover:bg-opacity-100 text-gray-600 hover:text-gray-200 group-hover:opacity-100'
+                  className={`absolute top-0 right-0 p-2 m-1 rounded-full hover:text-gray-200 bg-gray-800 bg-opacity-75 hover:bg-opacity-100 ${
+                    simIndex > -1
+                      ? 'text-green-500'
+                      : 'opacity-0 group-hover:opacity-100 text-gray-600'
                   }`}
                   onClick={(event) => {
                     event.stopPropagation()
 
-                    Router.push(
-                      `${pathname}${getQueryString({
-                        ...query,
-                        p: '',
-                        s: JSON.stringify([...similarityQuery, id]),
-                      })}`,
-                    )
+                    if (simIndex === -1) {
+                      Router.push(
+                        `${pathname}${getQueryString({
+                          ...query,
+                          p: '',
+                          s: JSON.stringify([...similarityQuery, id]),
+                        })}`,
+                      )
+                    }
+
+                    if (simIndex > -1) {
+                      const newSimilarityQuery = similarityQuery.filter(
+                        (simId) => simId !== id,
+                      )
+
+                      Router.push(
+                        `${pathname}${getQueryString({
+                          ...query,
+                          p: '',
+                          s:
+                            newSimilarityQuery.length &&
+                            JSON.stringify(newSimilarityQuery),
+                        })}`,
+                      )
+                    }
                   }}
                 >
                   <svg className="fill-current h-6 sm:h-7" viewBox="0 0 20 20">

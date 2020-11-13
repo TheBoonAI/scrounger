@@ -38,8 +38,8 @@ const SimilaritySearch = () => {
 
                 <button
                   type="button"
-                  title="Remove asset from similarity search"
-                  aria-label="Remove asset from similarity search"
+                  title="Remove from similarity search"
+                  aria-label="Remove from similarity search"
                   className="absolute top-0 right-0 p-1 m-1 rounded-full text-gray-600  bg-gray-800 bg-opacity-0 hover:text-gray-200 hover:bg-opacity-100"
                   onClick={() => {
                     Router.push(
