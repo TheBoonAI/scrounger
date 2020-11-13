@@ -2,8 +2,6 @@ import Router, { useRouter } from 'next/router'
 
 import { getQueryString } from '../Query/helpers'
 
-// import SimilaritySearchItem from './Item'
-
 const SimilaritySearch = () => {
   const {
     pathname,

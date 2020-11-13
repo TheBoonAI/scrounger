@@ -79,7 +79,7 @@ const Assets = () => {
                   className={`absolute top-0 right-0 p-2 m-1 rounded-full bg-gray-800 bg-opacity-75 ${
                     simSearchIndex > -1
                       ? 'cursor-not-allowed text-green-500'
-                      : 'opacity-0 hover:bg-opacity-100 group-hover:opacity-100'
+                      : 'opacity-0 hover:bg-opacity-100 text-gray-600 hover:text-gray-200 group-hover:opacity-100'
                   }`}
                   onClick={(event) => {
                     event.stopPropagation()
