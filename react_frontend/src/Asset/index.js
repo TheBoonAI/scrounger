@@ -60,7 +60,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
             </button>
           </div>
 
-          <div className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 pb-2 opacity-75 flex flex-wrap">
+          <div className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 pb-2 bg-opacity-75 flex flex-wrap">
             <ButtonCopy text={name} />
 
             <ButtonCopy text={path} />
@@ -70,7 +70,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
             <img
               className="object-contain"
               style={{ height: '85vh' }}
-              src={`/api/v1/assets/${id}/highres_file/`}
+              src={`/api/v1/assets/${id}/highres_file`}
               alt={name}
             />
           )}
@@ -85,7 +85,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
               controlsList="nodownload"
               disablePictureInPicture
             >
-              <source src={`/api/v1/assets/${id}/highres_file/`} />
+              <source src={`/api/v1/assets/${id}/highres_file`} />
             </video>
           )}
         </>

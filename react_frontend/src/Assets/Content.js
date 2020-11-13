@@ -67,7 +67,7 @@ const Assets = () => {
                     <link
                       rel="preload"
                       as="image"
-                      href={`/api/v1/assets/${id}/highres_file/`}
+                      href={`/api/v1/assets/${id}/highres_file`}
                     />
                   )}
 

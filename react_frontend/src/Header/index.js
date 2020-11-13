@@ -25,6 +25,7 @@ const Header = () => {
 
       <div className="flex xl:px-2 justify-between w-full max-w-screen-xl">
         <Tabs />
+
         <Pagination />
       </div>
     </div>
