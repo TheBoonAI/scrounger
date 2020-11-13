@@ -8,10 +8,8 @@ const Pagination = () => {
   const {
     pathname,
     query,
-    query: { p = 1, t, q, s = '[]' },
+    query: { p = 1, t, q, s },
   } = useRouter()
-
-  const similarityQuery = JSON.parse(s)
 
   const { data } = useSWR(
     `/assets${getQueryString({
@@ -19,7 +17,7 @@ const Pagination = () => {
       size: ASSETS_PER_PAGE,
       text_search: q,
       media_type: t,
-      similarity_search: similarityQuery.join(','),
+      similarity_search: s,
     })}`,
     { suspense: false },
   )

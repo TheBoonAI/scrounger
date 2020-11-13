@@ -15,10 +15,8 @@ const Assets = () => {
   const {
     pathname,
     query,
-    query: { q, p = 1, t, s = '[]' },
+    query: { q, p = 1, t, s = '' },
   } = useRouter()
-
-  const similarityQuery = JSON.parse(s)
 
   const { data } = useSWR(
     `/assets${getQueryString({
@@ -26,7 +24,7 @@ const Assets = () => {
       size: ASSETS_PER_PAGE,
       text_search: q,
       media_type: t,
-      similarity_search: similarityQuery.join(','),
+      similarity_search: s,
     })}`,
   )
 
@@ -50,7 +48,8 @@ const Assets = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 p-1">
         {assets.map(({ id, name, type }, index) => {
-          const simIndex = similarityQuery.findIndex((simId) => simId === id)
+          const similarityQuery = s.split(',')
+          const isSimilar = similarityQuery.find((simId) => simId === id)
 
           return (
             <div
@@ -72,41 +71,39 @@ const Assets = () => {
                 <button
                   type="button"
                   title={
-                    simIndex > -1
+                    isSimilar
                       ? 'Remove from similarity search'
                       : 'Find similar images'
                   }
                   aria-label={`Find similar images to ${name}`}
-                  className={`absolute top-0 right-0 p-2 m-1 rounded-full hover:text-gray-200 bg-gray-800 bg-opacity-75 hover:bg-opacity-100 ${
-                    simIndex > -1
-                      ? 'text-green-500'
-                      : 'opacity-0 group-hover:opacity-100 text-gray-600'
+                  className={`absolute top-0 right-0 p-2 m-1 rounded-full bg-gray-800 bg-opacity-75 hover:bg-opacity-100 ${
+                    isSimilar
+                      ? 'text-green-500 hover:text-white'
+                      : 'text-white hover:text-green-500 opacity-0 group-hover:opacity-100'
                   }`}
                   onClick={(event) => {
                     event.stopPropagation()
 
-                    if (simIndex === -1) {
+                    if (!isSimilar) {
                       Router.push(
                         `${pathname}${getQueryString({
                           ...query,
                           p: '',
-                          s: JSON.stringify([...similarityQuery, id]),
+                          s: s ? [similarityQuery, id].join(',') : id,
                         })}`,
                       )
                     }
 
-                    if (simIndex > -1) {
-                      const newSimilarityQuery = similarityQuery.filter(
-                        (simId) => simId !== id,
-                      )
+                    if (isSimilar) {
+                      const newSimilarityQuery = similarityQuery
+                        .filter((simId) => simId !== id)
+                        .join(',')
 
                       Router.push(
                         `${pathname}${getQueryString({
                           ...query,
                           p: '',
-                          s:
-                            newSimilarityQuery.length &&
-                            JSON.stringify(newSimilarityQuery),
+                          s: newSimilarityQuery,
                         })}`,
                       )
                     }

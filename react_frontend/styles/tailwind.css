@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-black text-gray-200 h-screen w-screen;
+    @apply bg-black text-white h-screen w-screen;
   }
 }
