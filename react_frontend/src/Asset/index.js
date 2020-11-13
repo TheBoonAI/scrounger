@@ -70,7 +70,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
             <img
               className="object-contain"
               style={{ height: '85vh' }}
-              src={`/api/v1/assets/${id}/highres_file/`}
+              src={`/api/v1/assets/${id}/highres_file`}
               alt={name}
             />
           )}
@@ -85,7 +85,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
               controlsList="nodownload"
               disablePictureInPicture
             >
-              <source src={`/api/v1/assets/${id}/highres_file/`} />
+              <source src={`/api/v1/assets/${id}/highres_file`} />
             </video>
           )}
         </>
