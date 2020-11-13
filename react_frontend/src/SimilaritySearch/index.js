@@ -18,7 +18,7 @@ const SimilaritySearch = () => {
       <h3 className="px-2 pt-4 text-sm text-gray-400">
         Showing results similar to:
       </h3>
-      <div className="flex px-1 py-2 border-b-2 border-gray-700">
+      <div className="flex px-1 py-1 border-b-2 border-gray-700">
         {similarityQuery.map((assetId) => {
           const newSimilarityQuery = similarityQuery
             .filter((id) => id !== assetId)
