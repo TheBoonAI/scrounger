@@ -60,7 +60,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
             </button>
           </div>
 
-          <div className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 pb-2 opacity-75 flex flex-wrap">
+          <div className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 pb-2 bg-opacity-75 flex flex-wrap">
             <ButtonCopy text={name} />
 
             <ButtonCopy text={path} />
