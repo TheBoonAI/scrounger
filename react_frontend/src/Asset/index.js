@@ -48,14 +48,12 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
           <div className="fixed top-0 right-0 mt-4 mr-4">
             <button
               type="button"
-              className="border-2 ml-2 rounded-full hover:text-green-500 hover:border-green-500"
+              className="border-2 p-1 ml-2 rounded-full hover:text-green-500 hover:border-green-500"
               onClick={() => setAssetIndex(-1)}
             >
-              <svg
-                viewBox="0 0 20 20"
-                className="h-6 sm:h-7 transform fill-current"
-              >
-                <path d="M13.9 4l1.4 1.4-4.2 4.2 4.2 4.2-1.4 1.4L9.7 11l-4.2 4.2L4 13.9l4.2-4.2L4 5.4 5.4 4l4.2 4.2L13.9 4z" />
+              <svg viewBox="0 0 20 20" className="h-5 stroke-current stroke-2">
+                <line x1="5" y1="5" x2="15" y2="15" />
+                <line x1="5" y1="15" x2="15" y2="5" />
               </svg>
             </button>
           </div>
