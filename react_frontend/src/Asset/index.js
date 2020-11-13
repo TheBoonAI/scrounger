@@ -77,6 +77,7 @@ const Asset = ({ assets, assetIndex, setAssetIndex }) => {
 
           {type === 'video' && (
             <video
+              key={id}
               crossOrigin="anonymous"
               className="object-contain"
               style={{ height: '85vh' }}

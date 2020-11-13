@@ -2,6 +2,8 @@ import Head from 'next/head'
 
 import SuspenseBoundary from '../SuspenseBoundary'
 
+import SimilaritySearch from '../SimilaritySearch'
+
 import AssetsContent from './Content'
 
 const Assets = () => {
@@ -11,9 +13,13 @@ const Assets = () => {
         <title>Scrounger</title>
       </Head>
 
-      <SuspenseBoundary>
-        <AssetsContent />
-      </SuspenseBoundary>
+      <div className="w-screen max-w-screen-xl h-full">
+        <SimilaritySearch />
+
+        <SuspenseBoundary>
+          <AssetsContent />
+        </SuspenseBoundary>
+      </div>
     </>
   )
 }
