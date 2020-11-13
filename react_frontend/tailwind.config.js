@@ -4,6 +4,6 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   variants: {
-    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover', 'group-focus'],
   },
 }
