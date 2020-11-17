@@ -188,7 +188,7 @@ def search_view(request):
         must_queries.append(sim_query)
 
     # Filter by file type.
-    media_type = request.GET.get('media_type')
+    media_type = request.GET.getlist('media_type')
     if media_type:
         filter = [{
             'terms': {
