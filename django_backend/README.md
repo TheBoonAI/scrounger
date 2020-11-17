@@ -17,10 +17,11 @@ This guide assumes you have the following already installed on your computer:
 We use Pipenv to handle package management for this project. Pipenv will create 
 a "virtual environment" for the project and make sure all the requisite dependencies for
 this project are installed there, rather than in your global python interpreter. To 
-install the required dependencies:
+install the required dependencies and activate the environment for you shell, run:
 
-1. In a terminal, from the `/scrounger`  parent directory, run:
+1. In a terminal, from the `/scrounger/django_backend`  directory, run:
     - `pipenv install`
+    - `pipenv shell`
 
 #### Pipenv - General Usage
 
@@ -29,11 +30,49 @@ install the required dependencies:
 - `pipenv shell` to convert your current terminal shell to one using this project's virtual 
 environment.
 
+### Configuring the API Key
+
+Scrounger is designed to utilize the ZMLP backend, but to do so you need to use a ZMLP
+Api Key. This can be obtained from your project in the Console web UI, in the API Keys
+section. Create an API Key with the appropriate permissions, and download the key.
+
+At this point the key will be in JSON format. We'll need to convert this into a Base64
+string, and then add it to our Scrounger configuration.
+
+#### Convert to Base64
+
+In an interactive python shell, run the following code. Set the `api_key_raw` variable
+in the code below to the copy and pasted API Key from the Console:
+
+```
+import json
+import base64
+api_key_raw = {...}   # Your api key goes here as a dictionary
+print(base64.b64encode(json.dumps(api_key_raw).encode('utf-8')).decode('utf-8'))
+```
+
+This will output the base64 encoded api key to stdout, which you can copy and paste for
+the following steps.
+
+#### Use your Base64 API Key
+
+You can either configure Scrounger to use the encoded API Key directly, or you can set
+it as an environment variable in your shell.
+
+- Settings file: In the `django_backend/scrounger/settings.py` file, set the `ZMLP_API_KEY`
+variable to the Base64 encoded value from the previous step.
+
+- Set an env variable: In a bash shell `export ZMLP_API_KEY=$Your_Base64_Key`. Use this
+shell for running the python runserver in subsequent steps.
+
 ### Start Backend Runserver
 
 Django provides a simple webserver for development called the runserver. Starting the 
 runserver will allow you to hit the backend api on `localhost:8000` or similar 
-(depending on the options you give).
+(depending on the options you give). Note, you'll need a ZMLP Api Key configured in your
+`settings.py` configuration file, or you'll need to set it as an environment variable in
+your shell.
+(see the "Configuring the API Key" section for details).
 
 1. If this is the first time you're running the runserver, or if the runserver mentions
 "unapplied migrations" on startup, be sure to run:
