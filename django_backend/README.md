@@ -69,7 +69,7 @@ shell for running the python runserver in subsequent steps.
 
 Django provides a simple webserver for development called the runserver. Starting the 
 runserver will allow you to hit the backend api on `localhost:8000` or similar 
-(depending on the options you give). Note, you'll need a ZMLP Api Key configured in your
+(depending on the options you give). Note, you'll need a ZMLP API Key configured in your
 `settings.py` configuration file, or you'll need to set it as an environment variable in
 your shell.
 (see the "Configuring the API Key" section for details).
