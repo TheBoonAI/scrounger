@@ -4,8 +4,6 @@ from functools import wraps
 import zmlp
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse, Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST

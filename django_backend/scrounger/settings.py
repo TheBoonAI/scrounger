@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import re
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,16 +84,32 @@ WSGI_APPLICATION = 'scrounger.wsgi.application'
 # the appropriate configuration
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+digital_ocean_db_url = os.environ.get('DATABASE_URL')
+if os.environ.get('DB_BACKEND') == 'postgres' or digital_ocean_db_url:
 
-if os.environ.get('DB_BACKEND') == 'postgres':
+    # When deploying as a Digital Ocean app the DATABASE_URL environment variable is
+    # is automatically added when a database is created. This string has all of the
+    # information needed to set up the database connection. The info is extracted using
+    # a grouped regex.
+    if digital_ocean_db_url:
+        regex = re.compile(r'^postgresql:\/\/(?P<username>.+):(?P<password>.+)@(?P<host>.+):(?P<port>[0-9]+)\/(?P<db_name>.+)[?].+$')
+        match = regex.match(digital_ocean_db_url)
+        connection_info = match.groupdict()
+
+    else:
+        connection_info = {'username': os.environ.get('PG_DB_USER', 'scrounger'),
+                           'password': os.environ['PG_DB_PASSWORD'],
+                           'host': os.environ.get('PG_DB_HOST', '127.0.0.1'),
+                           'port': os.environ.get('PG_DB_PORT', '5432'),
+                           'db_name': os.environ.get('PG_DB_NAME', 'scrounger')}
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('PG_DB_NAME', 'scrounger'),
-            'USER': os.environ.get('PG_DB_USER', 'scrounger'),
-            'PASSWORD': os.environ['PG_DB_PASSWORD'],
-            'HOST': os.environ.get('PG_DB_HOST', '127.0.0.1'),
-            'PORT': os.environ.get('PG_DB_PORT', '5432')
+            'NAME': connection_info['db_name'],
+            'USER': connection_info['username'],
+            'PASSWORD': connection_info['password'],
+            'HOST': connection_info['host'],
+            'PORT': connection_info['port']
         }
     }
 else:
