@@ -33,7 +33,7 @@ export const login = ({ username, password, dispatch }) => async (event) => {
   }
 
   if (response.status !== 200) {
-    return dispatch({ error: 'Network error.' })
+    return dispatch({ error: 'Something went wrong.' })
   }
 
   const user = await response.json()
@@ -52,7 +52,7 @@ export const logout = async () => {
     },
   })
 
-  mutate('/api/v1/me/', {}, false)
+  mutate('/api/v1/me', {}, false)
 
   cache.clear()
 
