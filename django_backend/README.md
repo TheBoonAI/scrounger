@@ -1,6 +1,6 @@
 # Scrounger Backend
 
-The Scrounger backend is built us a simple Django project to help introduce making 
+The Scrounger backend is built as a simple Django project to help introduce making 
 simple calls to retrieve and query for assets. 
 
 ## Backend API Development Setup
