@@ -33,7 +33,7 @@ environment.
 ### Configuring the API Key
 
 Scrounger is designed to utilize the ZMLP backend, but to do so you need to use a ZMLP
-Api Key. This can be obtained from your project in the Console web UI, in the API Keys
+API Key. This can be obtained from your project in the Console web UI, in the API Keys
 section. Create an API Key with the appropriate permissions, and download the key.
 
 At this point the key will be in JSON format. We'll need to convert this into a Base64
