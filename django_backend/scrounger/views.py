@@ -178,7 +178,7 @@ def search_view(request):
     # that will create this query. This object accepts a list of similarity hashes. Similarity
     # hashes for all of the assets are gathered and passed to the SimilarityQuery object.
     # The SimilarityQuery is then added to the list of query blocks.
-    similarity_search = request.GET.get('similarity_search')
+    similarity_search = request.GET.getlist('similarity_search')
     if similarity_search:
         simhashes = []
         for asset_id in similarity_search:
