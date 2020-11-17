@@ -88,7 +88,7 @@ digital_ocean_db_url = os.environ.get('DATABASE_URL')
 if os.environ.get('DB_BACKEND') == 'postgres' or digital_ocean_db_url:
 
     # When deploying as a Digital Ocean app the DATABASE_URL environment variable is
-    # is automatically added when a database is created. This string has all of the
+    # automatically added when a database is created. This string has all of the
     # information needed to set up the database connection. The info is extracted using
     # a grouped regex.
     if digital_ocean_db_url:
