@@ -41,22 +41,13 @@ string, and then add it to our Scrounger configuration.
 
 #### Convert to Base64
 
-In an interactive python shell, run the following code. Set the `api_key_raw` variable
-in the code below to the copy and pasted API Key from the Console:
-
-```
-import json
-import base64
-api_key_raw = {...}   # Your api key goes here as a dictionary
-print(base64.b64encode(json.dumps(api_key_raw).encode('utf-8')).decode('utf-8'))
-```
-
-This will output the base64 encoded api key to stdout, which you can copy and paste for
-the following steps.
+The JSON API Key from the prevous step needs to be converted to Base64. Python has a 
+`base64` library you can use, or you can use a simple tool like 
+[this one](https://base64.guru/converter/encode/text) to do the job.
 
 #### Use your Base64 API Key
 
-You can either configure Scrounger to use the encoded API Key directly, or you can set
+You can either configure Scrounger to use the Base64 encoded API Key directly, or you can set
 it as an environment variable in your shell.
 
 - Settings file: In the `django_backend/scrounger/settings.py` file, set the `ZMLP_API_KEY`
