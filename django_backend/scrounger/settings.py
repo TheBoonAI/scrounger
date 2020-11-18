@@ -31,8 +31,6 @@ if os.environ.get('DEBUG') == 'true':
 else:
     DEBUG = False
 
-DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 

@@ -18,6 +18,7 @@ RUN pip3 install --upgrade pip \
     && pip3 install pipenv \
     && pipenv install --system --deploy
 COPY django_backend /applications/scrounger/django_backend
+RUN mkdir /applications/scrounger/django_backend/scrounger/sqlite
 
 # Run the Django collect static command. This will bundle of the static files required for
 # Django admin pages.
