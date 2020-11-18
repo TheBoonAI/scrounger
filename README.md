@@ -32,7 +32,7 @@ is exposed on your network.
 
 ```bash
 docker pull zmlp/scrounger
-docker run -d -p 80:80 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e ZMLP_API_KEY='<ZMLP_API_KEY>' zmlp/scrounger
+docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e ZMLP_API_KEY='<ZMLP_API_KEY>' zmlp/scrounger
 ```
 
 Scrounger will now be running at http://<hostname_or_ip_address>
@@ -91,7 +91,7 @@ running on port 3000.
 ### Django uWSGI Application
 Backend application responsible for providing the API
 endpoints the frontend uses for fetching data and handling authentication and user administration. 
-It is a Django/uWSGI application served by a gunicorn server on port 8080.
+It is a Django/uWSGI application served by a gunicorn server on port 8000.
 
 ## Getting Started.
 To get started extending any of these components view the README.md found in each of their 
