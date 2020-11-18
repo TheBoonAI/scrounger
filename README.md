@@ -1,6 +1,6 @@
 # What is Scrounger?
 
-Scrounger is an open- source content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
+Scrounger is an open source content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
 The purpose of the Scrounger application is to:
 - Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Zorroa Python library.
 - Enable business end-users to evaluate the accelerated value Zorroa's search capability can deliver to their organization.
@@ -77,18 +77,18 @@ applications architecture and how to get started extending it.
 
 Scrounger consists of 3 major components.
 
-### Nginx Server - nginx_server/
+### Nginx Server
 Nginx server exposed to the outside world. It is responsible for routing
 requests to either the frontend or backend application based on the path. Any request beginning
 with `/api` or `/admin` is routed to the Django backend and all other requests are routed to 
 the React frontend.
 
-### React Node Application - react_frontend/
+### React Node Application
 Frontend application responsible for rendering
 all pages that are sent to the client. It is a React app served by a Next.js server
 running on port 3000.
 
-### Django uWSGI Application - django_backend/
+### Django uWSGI Application
 Backend application responsible for providing the API
 endpoints the frontend uses for fetching data and handling authentication and user administration. 
 It is a Django/uWSGI application served by a gunicorn server on port 8080.
