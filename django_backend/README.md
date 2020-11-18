@@ -1,9 +1,9 @@
 # Django Backend
 
 The Scrounger backend is a Django application responsible for hosting the api used by the
-frontend application and the admin site used to manage users. The can be found at `/api` 
-and `/admin` respectively. Use these links for more information [Django](https://docs.djangoproject.com/en/3.1/) 
-and the the [Django Admin Site](https://docs.djangoproject.com/en/3.1/ref/contrib/admin/).  
+frontend application and the admin site used to manage users. They can be found at `/api` 
+and `/admin` respectively. Use these links for more information about [Django](https://docs.djangoproject.com/en/3.1/) 
+and the [Django Admin Site](https://docs.djangoproject.com/en/3.1/ref/contrib/admin/).  
 
 ## Backend API Development Setup
 
@@ -32,7 +32,8 @@ environment.
 ### Configuring the API Key
 Scrounger is designed to utilize the ZMLP backend, but to do so you need to use a ZMLP
 API Key. This can be obtained from your project in the Console web UI, in the API Keys
-section. Create an API Key with the `Assets Read` permission, and download the key.
+section. Create an API Key with the `Assets Read` permission and copy the key. You can use 
+this [guide](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
 
 #### Use your API Key
 You can either configure Scrounger to use the Base64 encoded API Key directly, or you can set
