@@ -52,7 +52,6 @@ const Login = () => {
           <div className="h-12" />
 
           <Button
-            variant="primary"
             type="submit"
             onClick={login({ username, password, dispatch })}
           >

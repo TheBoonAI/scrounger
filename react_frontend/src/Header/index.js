@@ -15,9 +15,7 @@ const Header = () => {
         </h1>
 
         <div className="sm:order-last">
-          <Button variant="primary" onClick={logout}>
-            Sign out
-          </Button>
+          <Button onClick={logout}>Sign out</Button>
         </div>
 
         <Search />
