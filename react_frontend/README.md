@@ -1,7 +1,9 @@
-# Scrounger React Frontend
+# React Frontend
 
-`scrounger` is a React application built to provide examples for making API
-calls and building fast, responsive interfaces.
+The frontend application is a [React](https://reactjs.org/) app running in the 
+[Next.js](https://nextjs.org/) framework. [Tailwind CSS](https://tailwindcss.com/docs) is 
+used for styling and [SWR](https://swr.now.sh/) handles data fetching from the backend application.
+This application is responsible for rendering and serving all pages that are sent to the client.
 
 - [Tooling](#tooling)
 - [Conventions](#conventions)
@@ -65,6 +67,9 @@ lower mental overhead.
 
 ## Getting Started
 
+### Prerequisites
+- Node.js Active LTS version [installed](https://nodejs.org/en/).
+
 ### Installation
 
 Clone the project:
@@ -74,7 +79,7 @@ Install dependencies: `npm install` (or `npm ci`)
 
 ### Development
 
-Follow the instructions in `root/django_backend/README.md` to get the Django
+Follow the instructions in `django_backend/README.md` to get the Django
 backend running.
 
 Run `npm run dev` to start a local development node server on
