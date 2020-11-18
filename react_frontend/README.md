@@ -1,8 +1,7 @@
 # Scrounger React Frontend
 
-`scrounger` is a React application built to provide an example on leveraging
-[Zorroa](https://www.zorroa.com/)'s machine learning platform for your own
-website.
+`scrounger` is a React application built to provide examples for making API
+calls and building fast, responsive interfaces.
 
 - [Tooling](#tooling)
 - [Conventions](#conventions)
