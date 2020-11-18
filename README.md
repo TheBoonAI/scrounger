@@ -24,7 +24,7 @@ than $20/month. Full instructions are at the link below.
 ## On-Prem Deployment
 The following instructions are intended for an on-prem deployment used for testing and 
 evaluation purposes. This is not intended to be a production-grade installation; the 
-server will only accept HTTP connection on port 80 and users are tracked in a sqlite 
+server will only accept HTTP connections on port 80 and users are tracked in a sqlite 
 database.
 
 To start up scrounger run the following commands on a server that has docker installed and
@@ -102,7 +102,6 @@ respective folders for more information.
 [react_frontend/](https://github.com/Zorroa/scrounger/tree/main/react_frontend)
 
 [django_backend/](https://github.com/Zorroa/scrounger/tree/main/django_backend)
-
 
 
 
