@@ -85,7 +85,7 @@ the React frontend.
 
 ### React Node Application - react_frontend/
 Frontend application responsible for rendering
-all pages that are sent to the client. It is a React app served by an Express server
+all pages that are sent to the client. It is a React app served by a Next.js server
 running on port 3000.
 
 ### Django uWSGI Application - django_backend/
@@ -102,7 +102,6 @@ respective folders for more information.
 [react_frontend/](https://github.com/Zorroa/scrounger/tree/main/react_frontend)
 
 [django_backend/](https://github.com/Zorroa/scrounger/tree/main/django_backend)
-
 
 
 
