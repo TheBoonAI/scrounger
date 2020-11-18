@@ -43,7 +43,7 @@ Scrounger will now be running at http://<hostname_or_ip_address>
 
 Scrounger is open-sourced under the MIT license and we encourage anyone to fork this repo and
 use this as a base for building a proprietary web application that leverages Zorroa for 
-improving search capabilities of unknown and unstructure data. Below is a description of the
+improving search capabilities of unknown and unstructured data. Below is a description of the
 applications architecture and how to get started extending it.
 
 
