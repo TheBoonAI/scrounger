@@ -1,8 +1,8 @@
 # Scrounger React Frontend
 
-`scrounger` provides an example usage of Zorroa's ML APIs in a media management
-webpage. It relies on the [Next.js](https://nextjs.org/) framework to facilitate
-server-side rendering and enforce best practices.
+`scrounger` is a React application built to provide an example on leveraging
+[Zorroa](https://www.zorroa.com/)'s machine learning platform for your own
+website.
 
 - [Tooling](#tooling)
 - [Conventions](#conventions)
@@ -24,7 +24,7 @@ completely adhere to the
 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) through
 the
 [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)
-plugin. The only exception being that we don't use `.jsx` file extensions.
+plugin.
 
 Linting is checked with `npm run lint`.
 
@@ -75,8 +75,8 @@ Install dependencies: `npm install` (or `npm ci`)
 
 ### Development
 
-Follow the instructions in the root `README.md` to get the Django backend
-running.
+Follow the instructions in `root/django_backend/README.md` to get the Django
+backend running.
 
 Run `npm run dev` to start a local development node server on
 http://localhost:3000
@@ -88,12 +88,24 @@ http://localhost:3000
 
 ## Libraries
 
+### React
+
+[React](https://reactjs.org/) is a scalable, component-based Javascript library
+for building user interfaces.
+
+### NextJS
+
+[Next.js](https://nextjs.org/) is a React production framework used to
+facilitate server-side rendering and enforce best practices.
+
+### Tailwind CSS
+
+[Tailwind CSS](https://tailwindcss.com/docs) is used for styling. It's an
+unopinionated CSS framework that allows developers to quickly write responsive,
+in-line styling by providing low-level utilities.
+
 ### SWR
 
 [SWR](https://swr.now.sh/) is our primary data fetching mechanism. It's a React
 Hooks library that first returns the data from cache (stale), then sends the
 fetch request (revalidate), and finally comes with the up-to-date data again.
-
-[TailwindCSS](https://tailwindcss.com/docs) is used for styling. It's an
-unopinionated CSS framework that allows developers to quickly write responsive,
-in-line styling by providing low-level utilities.
