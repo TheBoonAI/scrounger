@@ -249,7 +249,7 @@ def asset_thumbnail_proxy_view(request, asset_id):
     thumbnail = asset.get_thumbnail(0)
 
     # Stream the file response from ZMLP.
-    return _stream_with_cache_control(app, thumbnail)
+    return _stream_with_cache_control(thumbnail)
 
 
 @require_GET
@@ -283,17 +283,16 @@ def asset_highres_proxy_view(request, asset_id):
             return Http404(f'There is no web proxy available for asset {asset_id}')
 
     # Stream the file response from ZMLP.
-    return _stream_with_cache_control(app, proxy)
+    return _stream_with_cache_control(proxy)
 
 
-def _stream_with_cache_control(app, _file):
+def _stream_with_cache_control(_file):
     """Streams the given file in a response.
 
     Helper method to centralize the action of streaming a file from ZMLP and setting
     appropriate cache-control headers on the response.
 
     Args:
-        app (ZmlpApp): The ZMLP App with current context.
         _file (zmlp.entity.asset.StoredFile): The File to stream.
 
     Returns:
