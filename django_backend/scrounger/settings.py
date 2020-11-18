@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import json
 import os
 from pathlib import Path
 
@@ -95,7 +95,7 @@ if os.environ.get('DB_BACKEND') == 'postgres':
         }
     }
 else:
-    DATABASE_PATH = os.environ.get('DATABASE_PATH', os.path.join(BASE_DIR, 'db.sqlite3'))
+    DATABASE_PATH = os.environ.get('DATABASE_PATH', os.path.join(BASE_DIR, 'scrounger/sqlite/db.sqlite3'))
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -146,7 +146,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'scrounger/static')
 
 # General Application Configuration
 ZMLP_API_URL = os.environ.get('ZMLP_API_URL', 'https://api.zvi.zorroa.com')
-ZMLP_API_KEY = os.environ.get('ZMLP_API_KEY')
+ZMLP_API_KEY = json.loads(os.environ.get('ZMLP_API_KEY', '{}'))
 
 SUPERUSER_EMAIL = os.environ.get('SUPERUSER_EMAIL', 'admin@example.com')
 SUPERUSER_PASSWORD = os.environ.get('SUPERUSER_PASSWORD', 'admin')

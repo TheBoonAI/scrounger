@@ -1,94 +1,104 @@
 # Scrounger
 
+Scrounger is an open-sourced content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
+The purpose of the Scrounger application is to:
+- Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Zorroa Python library.
+- Enable business end-users to evaluate the accelerated value Zorroa's search capability can deliver to their organization.
+- Serve as a starting point for a media storage and search app that can be extended into a proprietary app to meet unique business needs.
 
-## Backend API Setup
+# Deployment
+Scrounger consists of a single Docker container that can be configured using environment 
+variables. It can be deployed anywhere a container can be run but we have included easy 
+instructions for deploying in the two most common scenarios.
 
 ### Prerequisites
+- Zorroa API Key with "Assets Read" permission - [API Key Instructions](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) 
 
-This guide assumes you have the following already installed on your computer:
+## Cloud Deployment
+We suggest using Digital Ocean to get up and running with the 
+least amount of friction. The deployment process tasks about 10 minutes and costs less
+than $20/month. Full instructions are at the link below.
 
-- [Python 3.7](https://www.python.org/downloads/release/python-379/)
-- [Pipenv](https://pypi.org/project/pipenv/)
+[Digital Ocean Deployment Instructions](https://zorroa.gitbook.io/scrounger/)
 
-### Dependency Installation
+## On-Prem Deployment
+The following instructions are intended for an on-prem deployment used for testing and 
+evaluation purposes. This is not intended to be a production-grade installation; the 
+server will only accept HTTP connections on port 80 and users are tracked in a sqlite 
+database.
 
-We use Pipenv to handle package management for this project. Pipenv will create 
-a "virtual environment" for the project and make sure all the requisite dependencies for
-this project are installed there, rather than in your global python interpreter. To 
-install the required dependencies:
+To start up scrounger run the following commands on a server that has docker installed and
+is exposed on your network.
 
-1. In a terminal, from the `/scrounger`  parent directory, run:
-    - `pipenv install`
+```bash
+docker pull zmlp/scrounger
+docker run -d -p 80:80 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e ZMLP_API_KEY='<ZMLP_API_KEY>' zmlp/scrounger
+```
 
-#### Pipenv - General Usage
+Scrounger will now be running at http://<hostname_or_ip_address>
 
-- `pipenv -h` to display available commands.
-- `pipenv install $package` to install the given `$package`
-- `pipenv shell` to convert your current terminal shell to one using this project's virtual 
-environment.
+# Development
 
-### Start Backend Runserver
+## Architecture
 
-Django provides a simple webserver for development. Starting the runserver will allow
-you to hit the backend api on `localhost:8000` or similar (depending on the options you 
-give).
+Scrounger is open-sourced under the MIT license and we encourage anyone to fork this repo and
+use this as a base for building a proprietary web application that leverages Zorroa for 
+improving search capabilities of unknown and unstructure data. Below is a description of the
+applications architecture and how to get started extending it.
 
-1. If this is the first time you're running the runserver, or if the runserver mentions
-"unapplied migrations" on startup, be sure to run:
-    - `./manage.py migrate`
 
-1. To start the runserver, run:
-    - `./manage.py runserver`
-    
-- Note: The `manage.py` helper script lives inside the `scrounger/api`
-directory.
 
-### Running the tests
 
-We use the built-in Django test runner for running all of our tests. Running the tests 
-for the backend is as simple as:
+                    +------------------------+
+                    |                        |
+                    |   NGINX Server         |
+                    |                        |
+                    +------------------------+
+                        |                 |
+                        |                 |
+                        |                 |
+                        v                 v
+     +-------------------------+       +---------------------------+
+     |                         |       |                           |
+     |  React Node Application |       |  Django uWSGI Application |
+     |  (Frontend)             |       |  (Backend)                |
+     |                         |       |                           |
+     +-------------------------+       +---------------------------+
+                                                    |
+                                                    v
+                                         +---------------------+
+                                         |                     |
+                                         | Relational Database |
+                                         |                     |
+                                         +---------------------+
 
-1. `cd` into the `scrounger/api` directory
-1. Run: `./manage.py test`
 
-## Build the Docker Container
 
-The Scrounger application can be built as a standalone Docker Container. This is a helpful
-list of Docker commands you can use to build an image, run the image, and manage the
-resulting container. If doing continuous development, it may be wise to create aliases for
-these commands in your shell profile.
 
-### Build
+Scrounger consists of 3 major components.
 
-- From the root of the Scrounger directory, tagging the image as "scrounger", run:
-    - `docker build . -t scrounger` 
-    
-### Run
+### Nginx Server - nginx_server/
+Nginx server exposed to the outside world. It is responsible for routing
+requests to either the frontend or backend application based on the path. Any request beginning
+with `/api` or `/admin` is routed to the Django backend and all other requests are routed to 
+the React frontend.
 
-- To run the resulting image as a container, run:
-    - `docker run -p 80:80 scrounger`
-    
-- Run the container, mounting a local directory location to store a permananent
-  copy of the db, to prevent data loss if the db goes down:
-    - `docker run -p 80:80 -e DATABASE_PATH=/applications/db/db.sqlite3 --mount type=bind,source=/data/scrounger_db,destination=/applications/db scrounger`
-    - Note that the `DATABASE_PATH` env variable refers to the location of the db
-    *inside* the container's mounted location. 
-    
-### Manage
+### React Node Application - react_frontend/
+Frontend application responsible for rendering
+all pages that are sent to the client. It is a React app served by a Next.js server
+running on port 3000.
 
-- To attach to a shell in the running container, run:
-    - ```docker exec -it `docker ps | egrep scrounger | awk '{print $NF}'` /bin/bash```
-    
-- To kill the running Scrounger container, run:
-    - ```docker kill `docker ps | egrep scrounger | awk '{print $1}'` ```
-    
-## ENVIRONMENT VARIABLES
+### Django uWSGI Application - django_backend/
+Backend application responsible for providing the API
+endpoints the frontend uses for fetching data and handling authentication and user administration. 
+It is a Django/uWSGI application served by a gunicorn server on port 8080.
 
-Environment variables can be used to control the execution of Scrounger. Below is a table
-of the available environment variables that can be used.
+## Getting Started.
+To get started extending any of these components view the README.md found in each of their 
+respective folders for more information.
 
-| Env Variable Name | Description | Possible Values |
-| :---------------- | :---------- | :-------------- |
-| DEBUG             | Run the backend server in debug mode. | true/false |
-| DATABASE_PATH     | Full path to a full SQLite3 database file to use. | varies |
+[nginx_server/](https://github.com/Zorroa/scrounger/tree/main/nginx_server)
 
+[react_frontend/](https://github.com/Zorroa/scrounger/tree/main/react_frontend)
+
+[django_backend/](https://github.com/Zorroa/scrounger/tree/main/django_backend)
