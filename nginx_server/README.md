@@ -1,6 +1,6 @@
 # NGINX Server
 
-The NGINX server is responsible for receiving all outside requests and routing them to the correct upstream server. There are 2 upstream servers the frontend React application and the backend Django application. Any requests starting with /api or /admin will be routed to the Django backend and any othe requests will route to the React application.
+The NGINX server is responsible for receiving all outside requests and routing them to the correct upstream server. There are 2 upstream servers the frontend React application and the backend Django application. Any requests starting with `/api` or `/admin` will be routed to the Django backend and any othe requests will route to the React application.
 
 This directory contains 2 files that support starting the NGINX server.
 
