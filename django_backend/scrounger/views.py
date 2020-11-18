@@ -4,7 +4,8 @@ from functools import wraps
 import zmlp
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
-from django.http import JsonResponse, Http404, HttpResponse
+from django.http import JsonResponse, Http404, HttpResponse, StreamingHttpResponse
+from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
@@ -247,9 +248,8 @@ def asset_thumbnail_proxy_view(request, asset_id):
     # smallest size. There are 3 sizes (s, m, l).
     thumbnail = asset.get_thumbnail(0)
 
-    # Download the thumbnail file and return it to the client.
-    _file = app.assets.download_file(thumbnail)
-    return HttpResponse(_file.read(), content_type=thumbnail.mimetype)
+    # Stream the file response from ZMLP.
+    return _stream_with_cache_control(app, thumbnail)
 
 
 @require_GET
@@ -258,7 +258,7 @@ def asset_highres_proxy_view(request, asset_id):
     """View that returns the high resolution proxy of the given asset.
 
     Path Args:
-        asset_id(uuid): UUID of the asset to retrieve a high res file for.
+        asset_id (uuid): UUID of the asset to retrieve a high res file for.
 
     Http Methods: GET
 
@@ -282,6 +282,27 @@ def asset_highres_proxy_view(request, asset_id):
         except IndexError:
             return Http404(f'There is no web proxy available for asset {asset_id}')
 
-    # Download the file and return it to the client.
-    _file = app.assets.download_file(proxy)
-    return HttpResponse(_file.read(), content_type=proxy.mimetype)
+    # Stream the file response from ZMLP.
+    return _stream_with_cache_control(app, proxy)
+
+
+def _stream_with_cache_control(app, _file):
+    """Streams the given file in a response.
+
+    Helper method to centralize the action of streaming a file from ZMLP and setting
+    appropriate cache-control headers on the response.
+
+    Args:
+        app (ZmlpApp): The ZMLP App with current context.
+        _file (zmlp.entity.asset.StoredFile): The File to stream.
+
+    Returns:
+        (StreamingHttpResponse): Streaming response with the file and cache control
+            headers set.
+
+    """
+    response = StreamingHttpResponse(app.assets.stream_file(_file),
+                                     content_type=_file.mimetype)
+    patch_response_headers(response, cache_timeout=86400)
+    patch_cache_control(response, private=True)
+    return response
