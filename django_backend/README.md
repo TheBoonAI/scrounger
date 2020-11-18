@@ -36,14 +36,11 @@ section. Create an API Key with the `Assets Read` permission and copy the key. Y
 this [guide](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
 
 #### Use your API Key
-You can either configure Scrounger to use the Base64 encoded API Key directly, or you can set
-it as an environment variable in your shell.
+In your pipenv shell run `export ZMLP_API_KEY='<Your_Api_Key>'` set an environment variable. 
+Use this shell for running the python runserver in subsequent steps.
 
-- Settings file: In the `django_backend/scrounger/settings.py` file, set the `ZMLP_API_KEY`
-variable to the Base64 encoded value from the previous step.
-
-- Set an env variable: In a bash shell `export ZMLP_API_KEY='<Your_Api_Key>'`. Use this
-shell for running the python runserver in subsequent steps.
+Most modern IDEs can be configured to automatically create shells using the correct pipenv
+with preset environment variables. We suggest a configuration like this to increase efficiency. 
 
 ### Start Backend Runserver
 Django provides a simple webserver for development called the runserver. Starting the 
