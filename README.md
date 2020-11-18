@@ -1,6 +1,6 @@
-# Scrounger
+# What is Scrounger?
 
-Scrounger is an open-sourced content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
+Scrounger is an open- source content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
 The purpose of the Scrounger application is to:
 - Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Zorroa Python library.
 - Enable business end-users to evaluate the accelerated value Zorroa's search capability can deliver to their organization.
