@@ -1,0 +1,22 @@
+on:
+  push:
+    paths:
+      - "react_frontend/**"
+
+jobs:
+  react_frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./react_frontend
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:cover
+      - run: npm run build

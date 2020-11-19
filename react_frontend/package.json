@@ -56,8 +56,28 @@
       "react/react-in-jsx-scope": "off",
       "jsx-a11y/label-has-associated-control": "off",
       "jsx-a11y/label-has-for": "off",
-      "import/prefer-default-export": "off"
-    }
+      "jsx-a11y/media-has-caption": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/helpers.js"
+        ],
+        "rules": {
+          "import/prefer-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/__tests__/**/*.spec.js",
+          "**/__mocks__/**/*.js"
+        ],
+        "rules": {
+          "global-require": "off",
+          "no-underscore-dangle": "off"
+        }
+      }
+    ]
   },
   "prettier": {
     "printWidth": 80,
