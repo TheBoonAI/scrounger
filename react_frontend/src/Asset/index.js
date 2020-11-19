@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Modal } from 'react-responsive-modal'
