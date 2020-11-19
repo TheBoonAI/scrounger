@@ -25,7 +25,7 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.7"
     - name: Install Dependencies
       run: |
         pip install pipenv && pipenv sync
@@ -43,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['python' ]
+        language: [ 'python' ]
 
     steps:
       - name: Checkout repository
