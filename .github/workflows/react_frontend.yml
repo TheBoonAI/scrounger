@@ -4,11 +4,12 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    paths: [ "react_frontend/**" ]
+    paths: [ "react_frontend/**", ".github/workflows/react_frontend.yml" ]
     branches: [ main ]
 
 jobs:
-  react_frontend:
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     defaults:

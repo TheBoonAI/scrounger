@@ -4,11 +4,12 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    paths: [ "django_backend/**" ]
+    paths: [ "django_backend/**", ".github/workflows/django_backend.yml" ]
     branches: [ main ]
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
