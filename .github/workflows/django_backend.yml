@@ -1,0 +1,61 @@
+name: Django Backend
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    paths: [ "django_backend/**", ".github/workflows/django_backend.yml" ]
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+        
+    defaults:
+      run:
+        working-directory: ./django_backend
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.7"
+    - name: Install Dependencies
+      run: |
+        pip install pipenv && pipenv sync
+    - name: Run Linter
+      run: |
+        pipenv run flake8
+    - name: Run Tests
+      run: |
+        pipenv run ./manage.py test
+
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1

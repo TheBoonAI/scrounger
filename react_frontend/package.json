@@ -1,0 +1,110 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint '{pages,src}/**/*.js'",
+    "start": "next start",
+    "test": "jest --watch --notify --verbose --no-cache",
+    "test:cover": "jest --coverage --verbose --no-cache"
+  },
+  "dependencies": {
+    "next": "10.0.1",
+    "prop-types": "15.7.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-error-boundary": "3.0.2",
+    "react-responsive-modal": "5.2.6",
+    "react-use-clipboard": "1.0.2",
+    "swr": "0.3.6",
+    "tailwindcss": "1.9.6"
+  },
+  "devDependencies": {
+    "@testing-library/react": "11.1.1",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "6.15.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-react-hooks": "4.0.0",
+    "jest": "26.6.3",
+    "jest-fetch-mock": "3.0.3",
+    "prettier": "2.1.2"
+  },
+  "postcss": {
+    "plugins": [
+      "tailwindcss"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "extends": [
+      "airbnb",
+      "airbnb/hooks",
+      "prettier",
+      "prettier/react"
+    ],
+    "rules": {
+      "react/forbid-prop-types": "off",
+      "react/require-default-props": "off",
+      "react/jsx-filename-extension": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/react-in-jsx-scope": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/label-has-for": "off",
+      "jsx-a11y/media-has-caption": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/helpers.js"
+        ],
+        "rules": {
+          "import/prefer-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/__tests__/**/*.spec.js",
+          "**/__mocks__/**/*.js"
+        ],
+        "rules": {
+          "global-require": "off",
+          "no-underscore-dangle": "off"
+        }
+      }
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "always",
+    "proseWrap": "always"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.*/__mocks__"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  }
+}
