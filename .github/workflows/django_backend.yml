@@ -3,6 +3,7 @@ name: Django Backend Tests
 on:
   push:
     branches: [ main ]
+#     paths: ["django_backend/**"]
   pull_request:
     branches: [ main ]
 
@@ -27,7 +28,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
-        pipenv sync
+        pip install pipenv && pipenv sync
     - name: Run Tests
       run: |
         pipenv run flake8
