@@ -167,7 +167,7 @@ ZMLP_API_KEY = json.loads(os.environ.get('ZMLP_API_KEY', '{}'))
 SUPERUSER_EMAIL = os.environ.get('SUPERUSER_EMAIL', 'admin@example.com')
 SUPERUSER_PASSWORD = os.environ.get('SUPERUSER_PASSWORD', 'admin')
 SUPERUSER_FIRST_NAME = os.environ.get('SUPERUSER_FIRST_NAME', 'Admin')
-SUPERUSER_LAST_NAME= os.environ.get('SUPERUSER_LAST_NAME', 'Adminson')
+SUPERUSER_LAST_NAME = os.environ.get('SUPERUSER_LAST_NAME', 'Adminson')
 
 # Logging Settings
 LOGGING = {

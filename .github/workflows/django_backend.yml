@@ -3,7 +3,7 @@ name: Django Backend Tests
 on:
   push:
     branches: [ main ]
-#     paths: ["django_backend/**"]
+    paths: [ "django_backend/**" ]
   pull_request:
     branches: [ main ]
 
@@ -29,7 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install pipenv && pipenv sync
-    - name: Run Tests
+    - name: Run Linter
       run: |
         pipenv run flake8
     - name: Run Tests

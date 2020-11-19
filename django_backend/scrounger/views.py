@@ -4,7 +4,7 @@ from functools import wraps
 import zmlp
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
-from django.http import JsonResponse, Http404, HttpResponse, StreamingHttpResponse
+from django.http import JsonResponse, Http404, StreamingHttpResponse
 from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
