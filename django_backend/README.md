@@ -36,8 +36,8 @@ section. Create an API Key with the `Assets Read` permission and copy the key. Y
 this [guide](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
 
 #### Use your API Key
-In your pipenv shell run `export ZMLP_API_KEY='<Your_Api_Key>'` set an environment variable. 
-Use this shell for running the python runserver in subsequent steps.
+In your pipenv shell run `export ZMLP_API_KEY='<Your_Api_Key>'` to set an environment 
+variable. Use this shell for running the Django runserver in subsequent steps.
 
 Most modern IDEs can be configured to automatically create shells using the correct pipenv
 with preset environment variables. We suggest a configuration like this to increase efficiency. 
@@ -57,7 +57,7 @@ your shell.
 1. To start the runserver, run:
     - `./manage.py runserver`
     
-- Note: The `manage.py` helper script lives inside the `scrounger/api`
+- Note: The `manage.py` helper script lives inside the `django_backend`
 directory.
 
 ### Exploring the Code
@@ -70,7 +70,7 @@ the simple login/logout authentication endpoints, the asset search endpoint, as 
 as endpoints for serving thumbnails and videos.
 
 #### scrounger/urls.py
-Configures the routing paths to the endpoint functions contained in the `views.py`. This 
+Configures the routing paths to the endpoint functions contained in `views.py`. This 
 is where to go when looking for available endpoints or creating new ones.
 
 #### scrounger/settings.py
