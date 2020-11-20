@@ -300,7 +300,7 @@ def _stream_with_cache_control(_file):
             headers set.
 
     """
-    response = StreamingHttpResponse(app.assets.stream_file(_file),
+    response = StreamingHttpResponse(app.assets.stream_file(_file, chunk_size=2*1000*1000),
                                      content_type=_file.mimetype)
     patch_response_headers(response, cache_timeout=86400)
     patch_cache_control(response, private=True)
