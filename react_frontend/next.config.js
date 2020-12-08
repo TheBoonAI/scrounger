@@ -7,7 +7,11 @@ module.exports = {
        */
       {
         source: '/api/v1/:path*',
-        destination: `http://localhost:8000/api/v1/:path*`,
+        /**
+         * Use one of the following two destinations during development:
+         */
+        destination: `https://scrounger.zorroa.com/api/v1/:path*`,
+        // destination: `http://localhost:8000/api/v1/:path*`,
       },
     ]
   },
