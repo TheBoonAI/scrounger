@@ -11,9 +11,7 @@ import Asset from '../Asset'
 export const ASSETS_PER_PAGE = 24
 
 const AdobePremiereImport = dynamic(
-  () => {
-    return import('../AdobePremiereImport/index')
-  },
+  () => import('../AdobePremiereImport/index'),
   { ssr: false },
 )
 
