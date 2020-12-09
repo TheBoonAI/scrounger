@@ -10,7 +10,7 @@ import Asset from '../Asset'
 
 export const ASSETS_PER_PAGE = 24
 
-const AdobePremiere = dynamic(
+const AdobePremiereImport = dynamic(
   () => {
     return import('../AdobePremiereImport/index')
   },
@@ -97,7 +97,7 @@ const Assets = () => {
                 )}
               </button>
 
-              <AdobePremiere id={id} name={name} />
+              <AdobePremiereImport id={id} name={name} />
 
               <button
                 type="button"
