@@ -1,5 +1,4 @@
 /* eslint-disable global-require */
-/* eslint-disable no-undef */
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-await-in-loop */
 
@@ -23,7 +22,7 @@ export const importInPremiere = async ({ url, name }) => {
   /**
    * Open file
    */
-  const fs = cep_node.require('fs')
+  const fs = window.cep_node.require('fs')
 
   const file = fs.createWriteStream(filePath)
 
