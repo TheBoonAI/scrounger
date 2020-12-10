@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-constant-condition */
+
 import CEP from '@cep/csinterface'
-import http from 'http'
 
 export const importInPremiere = async ({ url, name }) => {
   const csInterface = new CEP.CSInterface()
@@ -10,19 +13,25 @@ export const importInPremiere = async ({ url, name }) => {
 
   const filePath = `${tempFolder}/${name}`
 
-  // eslint-disable-next-line no-undef
   const fs = cep_node.require('fs')
 
   const file = fs.createWriteStream(filePath)
 
-  http.get(url, (res) => {
-    res
-      .on('data', (data) => {
-        file.write(data)
-      })
-      .on('end', () => {
-        file.end()
-        csInterface.evalScript(`importFile("${filePath}")`)
-      })
-  })
+  const response = await fetch(url)
+
+  const reader = response.body.getReader()
+
+  while (true) {
+    const { value, done } = await reader.read()
+
+    if (done) {
+      file.end()
+
+      csInterface.evalScript(`importFile("${filePath}")`)
+
+      break
+    }
+
+    file.write(value)
+  }
 }
