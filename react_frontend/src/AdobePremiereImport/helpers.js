@@ -27,7 +27,7 @@ export const importInPremiere = async ({ url, name }) => {
   const file = fs.createWriteStream(filePath)
 
   /**
-   * Fetch ressource as stream
+   * Fetch resource as stream
    */
   const response = await fetch(url)
 
