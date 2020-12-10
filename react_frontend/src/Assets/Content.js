@@ -1,19 +1,14 @@
 import { useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import useSWR from 'swr'
-import dynamic from 'next/dynamic'
 
 import { getQueryString } from '../Query/helpers'
 
 import FetchAhead from '../FetchAhead'
 import Asset from '../Asset'
+import AdobePremiereImport from '../AdobePremiereImport'
 
 export const ASSETS_PER_PAGE = 24
-
-const AdobePremiereImport = dynamic(
-  () => import('../AdobePremiereImport/index'),
-  { ssr: false },
-)
 
 const Assets = () => {
   const [assetIndex, setAssetIndex] = useState(-1)
