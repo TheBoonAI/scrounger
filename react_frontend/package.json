@@ -24,7 +24,7 @@
     "@testing-library/react": "11.2.2",
     "eslint": "7.15.0",
     "eslint-config-airbnb": "18.2.1",
-    "eslint-config-prettier": "6.15.0",
+    "eslint-config-prettier": "7.0.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.21.5",
@@ -50,6 +50,7 @@
       "prettier/react"
     ],
     "rules": {
+      "arrow-body-style": "off",
       "react/forbid-prop-types": "off",
       "react/require-default-props": "off",
       "react/jsx-filename-extension": "off",
