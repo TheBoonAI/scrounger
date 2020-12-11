@@ -49,6 +49,7 @@
       "prettier/react"
     ],
     "rules": {
+      "arrow-body-style": "off",
       "react/forbid-prop-types": "off",
       "react/require-default-props": "off",
       "react/jsx-filename-extension": "off",
