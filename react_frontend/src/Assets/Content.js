@@ -6,6 +6,7 @@ import { getQueryString } from '../Query/helpers'
 
 import FetchAhead from '../FetchAhead'
 import Asset from '../Asset'
+import AdobePremiereImport from '../AdobePremiereImport'
 
 export const ASSETS_PER_PAGE = 24
 
@@ -88,6 +89,8 @@ const Assets = () => {
                   </span>
                 )}
               </button>
+
+              <AdobePremiereImport id={id} name={name} />
 
               <button
                 type="button"
