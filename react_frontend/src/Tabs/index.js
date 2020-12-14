@@ -12,7 +12,7 @@ const TYPES = [
 const Tabs = () => {
   const {
     pathname,
-    query: { t = 'all', q, s },
+    query: { t = 'all', q, s, dl },
   } = useRouter()
 
   return (
@@ -26,6 +26,7 @@ const Tabs = () => {
           onClick={() =>
             Router.push(
               `${pathname}${getQueryString({
+                dl,
                 q,
                 t: key === 'all' ? '' : key,
                 s,
