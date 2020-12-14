@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 
 import { importInPremiere } from './helpers'
 
 const AdobePremiereImport = ({ id, name }) => {
   const [isImporting, setIsImporting] = useState(false)
+
+  const {
+    query: { dl },
+  } = useRouter()
 
   if (typeof window.cep === 'undefined') return null
 
@@ -24,6 +29,7 @@ const AdobePremiereImport = ({ id, name }) => {
             url: `/api/v1/assets/${id}/highres_file`,
             name,
             setIsImporting,
+            dl,
           })
         }}
       >

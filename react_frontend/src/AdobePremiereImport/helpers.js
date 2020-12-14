@@ -2,7 +2,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-await-in-loop */
 
-export const importInPremiere = async ({ url, name, setIsImporting }) => {
+export const importInPremiere = async ({ url, name, setIsImporting, dl }) => {
   /**
    * Initialize CSInterface
    */
@@ -10,14 +10,7 @@ export const importInPremiere = async ({ url, name, setIsImporting }) => {
 
   const csInterface = new CSInterface()
 
-  /**
-   * Create temporary directory
-   */
-  const tempFolder = '/tmp/com.zorroa.scrounger.panel'
-
-  window.cep.fs.makedir(tempFolder)
-
-  const filePath = `${tempFolder}/${name}`
+  const filePath = `${dl}${name}`
 
   /**
    * Open file

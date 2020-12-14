@@ -1,14 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width" />
-    <!--
-      Invert the code comments on the following two lines to use your local
-      version of Scrounger during development
-    -->
-    <meta http-equiv="refresh" content="0;url=https://scrounger.zorroa.com/" />
-    <!-- <meta http-equiv="refresh" content="0;url=http://localhost:3000" /> -->
+
+    <title>Scrounger by Zorroa</title>
+
+    <link
+      href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+
+  <body class="text-white bg-gray-900 h-screen w-screen">
+    <div class="py-4 px-2 xl:px-4">
+      <h1 class="flex flex-col leading-none text-xl">
+        Scrounger<span class="text-sm text-green-500">by Zorroa</span>
+      </h1>
+    </div>
+
+    <div class="flex flex-1 justify-center items-center" style="height: 75%">
+      <form
+        class="grid grid-cols-4 items-center max-w-xl"
+        onsubmit="onSubmit(event)"
+      >
+        <div class="pr-2 row-span-3 flex justify-end">
+          <img
+            src="./raccoon.svg"
+            alt="An adorable raccoon holding a movie reel"
+            style="height: fit-content"
+          />
+        </div>
+
+        <h2 class="text-green-500 text-3xl col-span-3">Welcome to Scrounger</h2>
+
+        <h3 class="font-bold col-span-3">
+          Easily search and add video files to your projects.
+        </h3>
+
+        <p class="text-gray-500 col-span-3">
+          To get started set up the url where your app is deployed and choose
+          where you want downloaded assets to be stored:
+        </p>
+
+        <label for="url" class="text-gray-500 text-right pr-2 mt-4">
+          Deployed URL:
+        </label>
+
+        <input
+          id="url"
+          type="url"
+          name="url"
+          class="mt-4 col-span-3 rounded text-black p-2"
+          placeholder="https://example.com"
+          pattern="https?://.*"
+          required
+        />
+
+        <label for="dl" class="text-gray-500 text-right pr-2 mt-4">
+          Download Location:
+        </label>
+
+        <input
+          id="dl"
+          type="text"
+          name="dl"
+          class="mt-4 col-span-3 rounded text-black p-2"
+          placeholder="/Users/me/Downloads"
+          required
+          onclick="onDlClick()"
+        />
+
+        <div></div>
+
+        <div class="mt-4 col-span-3">
+          <button
+            class="h-auto py-2 px-4 rounded bg-green-500 hover:bg-green-700 whitespace-no-wrap"
+            type="submit"
+          >
+            Go
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      try {
+        const { dl, url } = JSON.parse(localStorage.getItem("settings"));
+
+        if (dl) {
+          document.getElementById("dl").value = dl;
+        }
+
+        if (url) {
+          document.getElementById("url").value = url;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+
+      function onDlClick() {
+        const response = window.cep.fs.showOpenDialog(
+          false,
+          true,
+          "Download Location"
+        );
+
+        const dl = response.data[0]
+          ? response.data[0].replace("file://", "")
+          : "";
+
+        document.getElementById("dl").value = dl;
+      }
+
+      function onSubmit(event) {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+
+        const settings = Object.fromEntries(data);
+
+        localStorage.setItem("settings", JSON.stringify(settings));
+
+        window.location = `${settings.url}?dl=${settings.dl}`;
+      }
+    </script>
+  </body>
 </html>
