@@ -2,7 +2,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-await-in-loop */
 
-export const importInPremiere = async ({ url, name }) => {
+export const importInPremiere = async ({ url, name, setIsImporting }) => {
   /**
    * Initialize CSInterface
    */
@@ -49,6 +49,8 @@ export const importInPremiere = async ({ url, name }) => {
        * Send file path to JSX for import into Premiere
        */
       csInterface.evalScript(`importFile("${filePath}")`)
+
+      setIsImporting(false)
 
       break
     }
