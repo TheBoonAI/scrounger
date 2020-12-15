@@ -1,6 +1,6 @@
 # Adobe Premiere Plugin
 
-An plugin that brings the search power of Scrounger into Adobe Premiere Pro.
+A plugin that brings the search power of Scrounger into Adobe Premiere Pro.
 This allows editors to access Scrounger natively in Adobe Premiere Pro and
 import the results of their searches directly into their projects.
 
