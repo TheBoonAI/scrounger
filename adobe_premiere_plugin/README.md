@@ -6,7 +6,7 @@ import the results of their searches directly into their projects.
 
 ## How It Works
 
-The panel is a simple static html page that lets the user fill in the location
+The panel is a simple static html page that lets the user fill in the url
 of their Scrounger application on the web, and the location to save the imported
 assets on their computer. Once the user clicks “Go”, they are redirected to the
 url provided. The Scrounger web application was slightly modified to detect when
