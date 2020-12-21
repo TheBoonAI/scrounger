@@ -16,7 +16,7 @@
     "react-dom": "17.0.1",
     "react-error-boundary": "3.1.0",
     "react-responsive-modal": "6.0.0",
-    "react-use-clipboard": "1.0.2",
+    "react-use-clipboard": "1.0.5",
     "swr": "0.3.9",
     "tailwindcss": "1.9.6"
   },
