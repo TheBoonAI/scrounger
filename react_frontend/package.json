@@ -17,7 +17,7 @@
     "react-error-boundary": "3.1.0",
     "react-responsive-modal": "6.0.0",
     "react-use-clipboard": "1.0.2",
-    "swr": "0.3.9",
+    "swr": "0.3.11",
     "tailwindcss": "1.9.6"
   },
   "devDependencies": {
