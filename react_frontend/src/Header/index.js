@@ -11,7 +11,7 @@ const Header = () => {
       <div className="flex flex-row flex-wrap sm:flex-no-wrap justify-between py-4 w-full">
         <h1 className="flex flex-col leading-none text-xl pr-2">
           Scrounger
-          <span className="text-sm text-green-500">by Zorroa</span>
+          <span className="text-sm text-green-500">by Boon AI</span>
         </h1>
 
         <div className="sm:order-last">

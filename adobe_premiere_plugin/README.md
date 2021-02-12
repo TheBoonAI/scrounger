@@ -62,7 +62,7 @@ ln -s "$(pwd)" ~/Library/Application\ Support/Adobe/CEP/extensions/scrounger
 You may have to restart the `cfprefsd` process and/or reboot your computer.
 
 5. Open Adobe Premiere Pro and click the Window menu > Extensions > Scrounger by
-   Zorroa.
+   Boon AI.
 
 ## Debugging
 
