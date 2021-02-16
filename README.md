@@ -1,4 +1,4 @@
-![Django Backend](https://github.com/Zorroa/scrounger/workflows/Django%20Backend/badge.svg) ![React Frontend](https://github.com/Zorroa/scrounger/workflows/React%20Frontend/badge.svg)
+![Django Backend](https://github.com/TheBoonAI/scrounger/workflows/Django%20Backend/badge.svg) ![React Frontend](https://github.com/TheBoonAI/scrounger/workflows/React%20Frontend/badge.svg)
 # What is Scrounger?
 
 Scrounger is an open source content search application built by [Boon AI](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
@@ -98,8 +98,8 @@ It is a Django/uWSGI application served by a gunicorn server on port 8000.
 To get started extending any of these components view the README.md found in each of their 
 respective folders for more information.
 
-[nginx_server/](https://github.com/Zorroa/scrounger/tree/main/nginx_server)
+[nginx_server/](https://github.com/TheBoonAI/scrounger/tree/main/nginx_server)
 
-[react_frontend/](https://github.com/Zorroa/scrounger/tree/main/react_frontend)
+[react_frontend/](https://github.com/TheBoonAI/scrounger/tree/main/react_frontend)
 
-[django_backend/](https://github.com/Zorroa/scrounger/tree/main/django_backend)
+[django_backend/](https://github.com/TheBoonAI/scrounger/tree/main/django_backend)

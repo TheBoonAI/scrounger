@@ -73,7 +73,7 @@ lower mental overhead.
 ### Installation
 
 Clone the project:
-`git clone git@github.com:Zorroa/scrounger.git && cd scrounger/react_frontend`
+`git clone git@github.com:TheBoonAI/scrounger.git && cd scrounger/react_frontend`
 
 Install dependencies: `npm install` (or `npm ci`)
 

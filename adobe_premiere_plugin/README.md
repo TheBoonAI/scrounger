@@ -29,7 +29,7 @@ and other [CEP Resources](https://github.com/Adobe-CEP/CEP-Resources).
 1. Clone the project:
 
 ```
-git clone git@github.com:Zorroa/scrounger.git && cd scrounger/adobe_premiere_plugin
+git clone git@github.com:TheBoonAI/scrounger.git && cd scrounger/adobe_premiere_plugin
 ```
 
 2. Create the Adobe Premiere Pro extensions folder if it doesn’t already exist:
