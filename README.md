@@ -1,7 +1,7 @@
 ![Django Backend](https://github.com/TheBoonAI/scrounger/workflows/Django%20Backend/badge.svg) ![React Frontend](https://github.com/TheBoonAI/scrounger/workflows/React%20Frontend/badge.svg)
 # What is Scrounger?
 
-Scrounger is an open source content search application built by [Boon AI](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
+Scrounger is an open source content search application built by [Boon AI](https://boonai.io), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
 The purpose of the Scrounger application is to:
 - Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Boon AI Python library.
 - Enable business end-users to evaluate the accelerated value Boon AI's search capability can deliver to their organization.
@@ -13,14 +13,14 @@ variables. It can be deployed anywhere a container can be run but we have includ
 instructions for deploying in the two most common scenarios.
 
 ### Prerequisites
-- Boon AI API Key with "Assets Read" permission - [API Key Instructions](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) 
+- Boon AI API Key with "Assets Read" permission - [API Key Instructions](https://boonai.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) 
 
 ## Cloud Deployment
 We suggest using Digital Ocean to get up and running with the 
 least amount of friction. The deployment process tasks about 10 minutes and costs less
 than $20/month. Full instructions are at the link below.
 
-[Digital Ocean Deployment Instructions](https://zorroa.gitbook.io/scrounger/)
+[Digital Ocean Deployment Instructions](https://boonai.gitbook.io/scrounger/)
 
 ## On-Prem Deployment
 The following instructions are intended for an on-prem deployment used for testing and 

@@ -161,7 +161,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'scrounger/static')
 
 
 # General Application Configuration
-ZMLP_API_URL = os.environ.get('ZMLP_API_URL', 'https://api.zvi.zorroa.com')
+ZMLP_API_URL = os.environ.get('ZMLP_API_URL', 'https://api.boonai.app')
 ZMLP_API_KEY = json.loads(os.environ.get('ZMLP_API_KEY', '{}'))
 
 SUPERUSER_EMAIL = os.environ.get('SUPERUSER_EMAIL', 'admin@example.com')

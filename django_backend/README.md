@@ -33,7 +33,7 @@ environment.
 Scrounger is designed to utilize the ZMLP backend, but to do so you need to use a ZMLP
 API Key. This can be obtained from your project in the Console web UI, in the API Keys
 section. Create an API Key with the `Assets Read` permission and copy the key. You can use 
-this [guide](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
+this [guide](https://boonai.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
 
 #### Use your API Key
 In your pipenv shell run `export ZMLP_API_KEY='<Your_Api_Key>'` to set an environment 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-  <Extension Id="com.zorroa.scrounger.panel">
+  <Extension Id="app.boonai.scrounger.panel">
     <HostList>
       <Host Name="PPRO" Port="8080"/>
     </HostList>
