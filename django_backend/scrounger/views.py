@@ -185,7 +185,7 @@ def search_view(request):
         for asset_id in similarity_search.split(','):
             simhash = app.assets.get_asset(asset_id).get_attr('analysis.boonai-image-similarity.simhash')
             simhashes.append(simhash)
-        sim_query = boonai.SimilarityQuery(simhashes)
+        sim_query = boonsdk.SimilarityQuery(simhashes)
         must_queries.append(sim_query)
 
     # Filter by file type.
@@ -293,7 +293,7 @@ def _stream_with_cache_control(_file):
     appropriate cache-control headers on the response.
 
     Args:
-        _file (boonai.entity.asset.StoredFile): The File to stream.
+        _file (boonsdk.entity.asset.StoredFile): The File to stream.
 
     Returns:
         (StreamingHttpResponse): Streaming response with the file and cache control
