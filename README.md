@@ -33,7 +33,7 @@ is exposed on your network.
 
 ```bash
 docker pull boonai/scrounger
-docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e BOON_API_KEY='<BOON_API_KEY>' boonai/scrounger
+docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e BOONAI_API_KEY='<BOONAI_API_KEY>' boonai/scrounger
 ```
 
 Scrounger will now be running at http://<hostname_or_ip_address>

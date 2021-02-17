@@ -161,8 +161,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'scrounger/static')
 
 
 # General Application Configuration
-BOON_API_URL = os.environ.get('BOON_API_URL', 'https://api.boonai.app')
-BOON_API_KEY = json.loads(os.environ.get('BOON_API_KEY', '{}'))
+BOONAI_API_URL = os.environ.get('BOONAI_API_URL', 'https://api.boonai.app')
+BOONAI_API_KEY = json.loads(os.environ.get('BOONAI_API_KEY', '{}'))
 
 SUPERUSER_EMAIL = os.environ.get('SUPERUSER_EMAIL', 'admin@example.com')
 SUPERUSER_PASSWORD = os.environ.get('SUPERUSER_PASSWORD', 'admin')

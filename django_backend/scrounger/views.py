@@ -1,7 +1,7 @@
 import json
 from functools import wraps
 
-import boonai
+import boonsdk
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
 from django.http import JsonResponse, Http404, StreamingHttpResponse
@@ -9,7 +9,7 @@ from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
-app = boonai.BoonAiApp(apikey=settings.BOON_API_KEY, server=settings.BOON_API_URL)
+app = boonsdk.BoonApp(apikey=settings.BOONAI_API_KEY, server=settings.BOONAI_API_URL)
 
 
 def authentication_required(view_func):
@@ -183,8 +183,7 @@ def search_view(request):
     if similarity_search:
         simhashes = []
         for asset_id in similarity_search.split(','):
-            simhash = app.assets.get_asset(asset_id).get_attr(
-                'analysis.boonai-image-similarity.simhash')
+            simhash = app.assets.get_asset(asset_id).get_attr('analysis.boonai-image-similarity.simhash')
             simhashes.append(simhash)
         sim_query = boonai.SimilarityQuery(simhashes)
         must_queries.append(sim_query)

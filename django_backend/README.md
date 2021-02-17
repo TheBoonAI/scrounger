@@ -36,7 +36,7 @@ section. Create an API Key with the `Assets Read` permission and copy the key. Y
 this [guide](https://docs.boonai.app/boonsdk/working-with-api-keys) to help you. 
 
 #### Use your API Key
-In your pipenv shell run `export BOON_API_KEY='<Your_Api_Key>'` to set an environment 
+In your pipenv shell run `export BOONAI_API_KEY='<Your_Api_Key>'` to set an environment 
 variable. Use this shell for running the Django runserver in subsequent steps.
 
 Most modern IDEs can be configured to automatically create shells using the correct pipenv
