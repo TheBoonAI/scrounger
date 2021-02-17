@@ -30,13 +30,13 @@ install the required dependencies and activate the environment for you shell, ru
 environment.
 
 ### Configuring the API Key
-Scrounger is designed to utilize the ZMLP backend, but to do so you need to use a ZMLP
+Scrounger is designed to utilize the Boon AI backend, but to do so you need to use a Boon AI
 API Key. This can be obtained from your project in the Console web UI, in the API Keys
 section. Create an API Key with the `Assets Read` permission and copy the key. You can use 
-this [guide](https://boonai.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) to help you. 
+this [guide](https://docs.boonai.app/boonsdk/working-with-api-keys) to help you. 
 
 #### Use your API Key
-In your pipenv shell run `export ZMLP_API_KEY='<Your_Api_Key>'` to set an environment 
+In your pipenv shell run `export BOON_API_KEY='<Your_Api_Key>'` to set an environment 
 variable. Use this shell for running the Django runserver in subsequent steps.
 
 Most modern IDEs can be configured to automatically create shells using the correct pipenv
@@ -45,7 +45,7 @@ with preset environment variables. We suggest a configuration like this to incre
 ### Start Backend Runserver
 Django provides a simple webserver for development called the runserver. Starting the 
 runserver will allow you to hit the backend api on `localhost:8000` or similar 
-(depending on the options you give). Note, you'll need a ZMLP API Key configured in your
+(depending on the options you give). Note, you'll need a Boon AI API Key configured in your
 `settings.py` configuration file, or you'll need to set it as an environment variable in
 your shell.
 (see the "Configuring the API Key" section for details).

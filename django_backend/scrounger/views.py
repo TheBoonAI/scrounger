@@ -1,7 +1,7 @@
 import json
 from functools import wraps
 
-import zmlp
+import boonai
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
 from django.http import JsonResponse, Http404, StreamingHttpResponse
@@ -9,7 +9,7 @@ from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
-app = zmlp.ZmlpApp(apikey=settings.ZMLP_API_KEY, server=settings.ZMLP_API_URL)
+app = boonai.BoonAiApp(apikey=settings.BOON_API_KEY, server=settings.BOON_API_URL)
 
 
 def authentication_required(view_func):
@@ -175,7 +175,7 @@ def search_view(request):
 
     # Check for a query param describing a similarity search. This will be a list of asset ids
     # the user is trying to find similar assets for. The query for finding similar assets is
-    # complex and uses proprietary ZMLP Elasticsearch plugins so there is a convenient object
+    # complex and uses proprietary Boon AI Elasticsearch plugins so there is a convenient object
     # that will create this query. This object accepts a list of similarity hashes. Similarity
     # hashes for all of the assets are gathered and passed to the SimilarityQuery object.
     # The SimilarityQuery is then added to the list of query blocks.
@@ -183,9 +183,10 @@ def search_view(request):
     if similarity_search:
         simhashes = []
         for asset_id in similarity_search.split(','):
-            simhash = app.assets.get_asset(asset_id).get_attr('analysis.zvi-image-similarity.simhash')
+            simhash = app.assets.get_asset(asset_id).get_attr(
+                'analysis.zvi-image-similarity.simhash')
             simhashes.append(simhash)
-        sim_query = zmlp.SimilarityQuery(simhashes)
+        sim_query = boonai.SimilarityQuery(simhashes)
         must_queries.append(sim_query)
 
     # Filter by file type.
@@ -212,7 +213,7 @@ def search_view(request):
             bool_clause['filter'] = filter
         search['query'] = {'bool': bool_clause}
 
-    # Use the search function to send the Elasticsearch search query to the ZMLP server and
+    # Use the search function to send the Elasticsearch search query to the Boon AI server and
     # receive a list of matching assets. The required information for each asset is stored
     # in a dictionary and the list of dictionaries is returned in a json response.
     assets = []
@@ -248,7 +249,7 @@ def asset_thumbnail_proxy_view(request, asset_id):
     # smallest size. There are 3 sizes (s, m, l).
     thumbnail = asset.get_thumbnail(0)
 
-    # Stream the file response from ZMLP.
+    # Stream the file response from Boon AI.
     return _stream_with_cache_control(thumbnail)
 
 
@@ -282,18 +283,18 @@ def asset_highres_proxy_view(request, asset_id):
         except IndexError:
             return Http404(f'There is no web proxy available for asset {asset_id}')
 
-    # Stream the file response from ZMLP.
+    # Stream the file response from Boon AI.
     return _stream_with_cache_control(proxy)
 
 
 def _stream_with_cache_control(_file):
     """Streams the given file in a response.
 
-    Helper method to centralize the action of streaming a file from ZMLP and setting
+    Helper method to centralize the action of streaming a file from Boon AI and setting
     appropriate cache-control headers on the response.
 
     Args:
-        _file (zmlp.entity.asset.StoredFile): The File to stream.
+        _file (boonai.entity.asset.StoredFile): The File to stream.
 
     Returns:
         (StreamingHttpResponse): Streaming response with the file and cache control

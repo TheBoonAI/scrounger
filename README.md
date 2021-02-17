@@ -13,14 +13,14 @@ variables. It can be deployed anywhere a container can be run but we have includ
 instructions for deploying in the two most common scenarios.
 
 ### Prerequisites
-- Boon AI API Key with "Assets Read" permission - [API Key Instructions](https://boonai.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) 
+- Boon AI API Key with "Assets Read" permission - [API Key Instructions](https://docs.boonai.app/boonsdk/working-with-api-keys) 
 
 ## Cloud Deployment
 We suggest using Digital Ocean to get up and running with the 
 least amount of friction. The deployment process tasks about 10 minutes and costs less
 than $20/month. Full instructions are at the link below.
 
-[Digital Ocean Deployment Instructions](https://boonai.gitbook.io/scrounger/)
+[Digital Ocean Deployment Instructions](https://docs.boonai.app/scrounger/)
 
 ## On-Prem Deployment
 The following instructions are intended for an on-prem deployment used for testing and 
@@ -32,8 +32,8 @@ To start up scrounger run the following commands on a server that has docker ins
 is exposed on your network.
 
 ```bash
-docker pull zmlp/scrounger
-docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e ZMLP_API_KEY='<ZMLP_API_KEY>' zmlp/scrounger
+docker pull boonai/scrounger
+docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e BOON_API_KEY='<BOON_API_KEY>' boonai/scrounger
 ```
 
 Scrounger will now be running at http://<hostname_or_ip_address>
