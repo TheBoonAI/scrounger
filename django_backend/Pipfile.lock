@@ -350,14 +350,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.4.0"
-        },
-        "zvi-client": {
-            "hashes": [
-                "sha256:584f44487a665dfc11187ca2c0ce0097b6c6fd0f9ad07cc429981578b5d148a2",
-                "sha256:ace8ab82d7b95a1e009028a80be3df97ddd29347d5615487d5b44e663770c886"
-            ],
-            "index": "pypi",
-            "version": "==1.1.1"
         }
     },
     "develop": {}

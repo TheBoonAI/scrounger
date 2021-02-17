@@ -184,7 +184,7 @@ def search_view(request):
         simhashes = []
         for asset_id in similarity_search.split(','):
             simhash = app.assets.get_asset(asset_id).get_attr(
-                'analysis.zvi-image-similarity.simhash')
+                'analysis.boonai-image-similarity.simhash')
             simhashes.append(simhash)
         sim_query = boonai.SimilarityQuery(simhashes)
         must_queries.append(sim_query)

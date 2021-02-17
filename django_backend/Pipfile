@@ -9,7 +9,6 @@ verify_ssl = true
 django = "*"
 flake8 = "*"
 gunicorn = "*"
-zvi-client = "*"
 psycopg2-binary = "*"
 
 [requires]
