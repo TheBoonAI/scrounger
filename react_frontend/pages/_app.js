@@ -16,7 +16,7 @@ class MyApp extends App {
     return (
       <>
         <Head>
-          <title>Scrounger by Boon AI</title>
+          <title>Scrounger powered by Boon AI</title>
         </Head>
 
         <Authentication>
