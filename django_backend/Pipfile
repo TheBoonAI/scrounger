@@ -10,6 +10,7 @@ django = "*"
 flake8 = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+boonsdk = "*"
 
 [requires]
 python_version = "3.7"
