@@ -1,10 +1,10 @@
-![Django Backend](https://github.com/Zorroa/scrounger/workflows/Django%20Backend/badge.svg) ![React Frontend](https://github.com/Zorroa/scrounger/workflows/React%20Frontend/badge.svg)
+![Django Backend](https://github.com/TheBoonAI/scrounger/workflows/Django%20Backend/badge.svg) ![React Frontend](https://github.com/TheBoonAI/scrounger/workflows/React%20Frontend/badge.svg)
 # What is Scrounger?
 
-Scrounger is an open source content search application built by [Zorroa](https://zorroa.com), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
+Scrounger is an open source content search application built by [Boon AI](https://boonai.io), the makers of a GUI-driven machine learning integration platform. The app is designed to let its users experience what it’s like to load their media assets and run an ML-powered  search within a custom app, in under an hour.
 The purpose of the Scrounger application is to:
-- Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Zorroa Python library.
-- Enable business end-users to evaluate the accelerated value Zorroa's search capability can deliver to their organization.
+- Guide developers on the best practices of integrating ML-generated metadata into a proprietary or third party app using the Boon AI Python library.
+- Enable business end-users to evaluate the accelerated value Boon AI's search capability can deliver to their organization.
 - Serve as a starting point for a media storage and search app that can be extended into a proprietary app to meet unique business needs.
 
 # Deployment
@@ -13,14 +13,14 @@ variables. It can be deployed anywhere a container can be run but we have includ
 instructions for deploying in the two most common scenarios.
 
 ### Prerequisites
-- Zorroa API Key with "Assets Read" permission - [API Key Instructions](https://zorroa.gitbook.io/zmlp/getting-started/quick-start/python-zvi-client#get-api-key) 
+- Boon AI API Key with "Assets Read" permission - [API Key Instructions](https://docs.boonai.app/boonsdk/working-with-api-keys) 
 
 ## Cloud Deployment
 We suggest using Digital Ocean to get up and running with the 
 least amount of friction. The deployment process tasks about 10 minutes and costs less
 than $20/month. Full instructions are at the link below.
 
-[Digital Ocean Deployment Instructions](https://zorroa.gitbook.io/scrounger/)
+[Digital Ocean Deployment Instructions](https://docs.boonai.app/scrounger/)
 
 ## On-Prem Deployment
 The following instructions are intended for an on-prem deployment used for testing and 
@@ -32,8 +32,8 @@ To start up scrounger run the following commands on a server that has docker ins
 is exposed on your network.
 
 ```bash
-docker pull zmlp/scrounger
-docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e ZMLP_API_KEY='<ZMLP_API_KEY>' zmlp/scrounger
+docker pull boonai/scrounger
+docker run -d -p 80:8080 -v /var/lib/scrounger:/applications/scrounger/django_backend/scrounger/sqlite -e BOONAI_API_KEY='<BOONAI_API_KEY>' boonai/scrounger
 ```
 
 Scrounger will now be running at http://<hostname_or_ip_address>
@@ -43,7 +43,7 @@ Scrounger will now be running at http://<hostname_or_ip_address>
 ## Architecture
 
 Scrounger is open-sourced under the MIT license and we encourage anyone to fork this repo and
-use this as a base for building a proprietary web application that leverages Zorroa for 
+use this as a base for building a proprietary web application that leverages Boon AI for 
 improving search capabilities of unknown and unstructured data. Below is a description of the
 applications architecture and how to get started extending it.
 
@@ -98,8 +98,8 @@ It is a Django/uWSGI application served by a gunicorn server on port 8000.
 To get started extending any of these components view the README.md found in each of their 
 respective folders for more information.
 
-[nginx_server/](https://github.com/Zorroa/scrounger/tree/main/nginx_server)
+[nginx_server/](https://github.com/TheBoonAI/scrounger/tree/main/nginx_server)
 
-[react_frontend/](https://github.com/Zorroa/scrounger/tree/main/react_frontend)
+[react_frontend/](https://github.com/TheBoonAI/scrounger/tree/main/react_frontend)
 
-[django_backend/](https://github.com/Zorroa/scrounger/tree/main/django_backend)
+[django_backend/](https://github.com/TheBoonAI/scrounger/tree/main/django_backend)

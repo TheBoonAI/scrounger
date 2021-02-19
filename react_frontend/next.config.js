@@ -10,7 +10,7 @@ module.exports = {
         /**
          * Use one of the following two destinations during development:
          */
-        destination: 'https://scrounger.zorroa.com/api/v1/:path*',
+        destination: 'https://scrounger.boonai.app/api/v1/:path*',
         // destination: 'http://localhost:8000/api/v1/:path*',
       },
     ]
