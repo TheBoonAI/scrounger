@@ -1,16 +1,18 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import Router, { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { getQueryString } from '../Query/helpers'
 
 import FetchAhead from '../FetchAhead'
+import Uploader from '../Uploader'
 import Asset from '../Asset'
 import AdobePremiereImport from '../AdobePremiereImport'
 
 export const ASSETS_PER_PAGE = 24
 
-const Assets = () => {
+const Assets = ({ uploadedAssets, setUploadedAssets }) => {
   const [assetIndex, setAssetIndex] = useState(-1)
 
   const {
@@ -41,6 +43,11 @@ const Assets = () => {
 
   return (
     <>
+      <Uploader
+        uploadedAssets={uploadedAssets}
+        setUploadedAssets={setUploadedAssets}
+      />
+
       <Asset
         assets={assets}
         assetIndex={assetIndex}
@@ -167,6 +174,11 @@ const Assets = () => {
       )}
     </>
   )
+}
+
+Assets.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
+  setUploadedAssets: PropTypes.func.isRequired,
 }
 
 export default Assets
