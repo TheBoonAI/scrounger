@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import SuspenseBoundary from '../SuspenseBoundary'
 
@@ -6,9 +6,7 @@ import SimilaritySearch from '../SimilaritySearch'
 
 import AssetsContent from './Content'
 
-const Assets = () => {
-  const [uploadedAssets, setUploadedAssets] = useState({})
-
+const Assets = ({ uploadedAssets, setUploadedAssets }) => {
   return (
     <div className="w-screen max-w-screen-xl h-full">
       <SimilaritySearch
@@ -24,6 +22,11 @@ const Assets = () => {
       </SuspenseBoundary>
     </div>
   )
+}
+
+Assets.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
+  setUploadedAssets: PropTypes.func.isRequired,
 }
 
 export default Assets

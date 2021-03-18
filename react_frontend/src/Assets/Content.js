@@ -12,7 +12,7 @@ import AdobePremiereImport from '../AdobePremiereImport'
 
 export const ASSETS_PER_PAGE = 24
 
-const Assets = ({ uploadedAssets, setUploadedAssets }) => {
+const AssetsContent = ({ uploadedAssets, setUploadedAssets }) => {
   const [assetIndex, setAssetIndex] = useState(-1)
 
   const {
@@ -28,6 +28,7 @@ const Assets = ({ uploadedAssets, setUploadedAssets }) => {
       text_search: q,
       media_type: t,
       similarity_search: s,
+      uploaded_assets: JSON.stringify(uploadedAssets),
     })}`,
   )
 
@@ -176,9 +177,9 @@ const Assets = ({ uploadedAssets, setUploadedAssets }) => {
   )
 }
 
-Assets.propTypes = {
+AssetsContent.propTypes = {
   uploadedAssets: PropTypes.object.isRequired,
   setUploadedAssets: PropTypes.func.isRequired,
 }
 
-export default Assets
+export default AssetsContent

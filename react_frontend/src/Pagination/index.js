@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import Router, { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { getQueryString } from '../Query/helpers'
 import { ASSETS_PER_PAGE } from '../Assets/Content'
 
-const Pagination = () => {
+const Pagination = ({ uploadedAssets }) => {
   const {
     pathname,
     query,
@@ -18,6 +19,7 @@ const Pagination = () => {
       text_search: q,
       media_type: t,
       similarity_search: s,
+      uploaded_assets: JSON.stringify(uploadedAssets),
     })}`,
     { suspense: false },
   )
@@ -85,6 +87,10 @@ const Pagination = () => {
       </button>
     </div>
   )
+}
+
+Pagination.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
 }
 
 export default Pagination

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import { logout } from '../Authentication/helpers'
 
 import Button from '../Button'
@@ -5,7 +7,7 @@ import Search from '../Search'
 import Tabs from '../Tabs'
 import Pagination from '../Pagination'
 
-const Header = () => {
+const Header = ({ uploadedAssets }) => {
   return (
     <div className="bg-gray-900 w-full px-2 xl:px-4 flex flex-col items-center flex-shrink-0">
       <div className="flex flex-row flex-wrap sm:flex-no-wrap justify-between py-4 w-full">
@@ -24,10 +26,13 @@ const Header = () => {
       <div className="flex xl:px-2 justify-between w-full max-w-screen-xl">
         <Tabs />
 
-        <Pagination />
+        <Pagination uploadedAssets={uploadedAssets} />
       </div>
     </div>
   )
 }
 
+Header.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
+}
 export default Header
