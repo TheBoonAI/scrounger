@@ -28,7 +28,7 @@ const AssetsContent = ({ uploadedAssets, setUploadedAssets }) => {
       text_search: q,
       media_type: t,
       similarity_search: s,
-      uploaded_assets: JSON.stringify(uploadedAssets),
+      uploaded_assets: JSON.stringify(Object.values(uploadedAssets)),
     })}`,
   )
 
