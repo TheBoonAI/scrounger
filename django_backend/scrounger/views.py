@@ -198,9 +198,8 @@ def search_view(request):
         uploaded_assets = json.loads(unquote(uploaded_assets_json))
         for uploaded_asset in uploaded_assets:
             image_format, image_base64 = uploaded_asset.split(';base64,')
-            image_extension = image_format.split('/')[-1]
             image_decoded = base64.b64decode(image_base64)
-            image_file = NamedTemporaryFile(suffix=image_extension, delete=False)
+            image_file = NamedTemporaryFile(suffix='jpeg', delete=False)
             image_file.write(image_decoded)
             image_file.flush()
             images.append(image_file.name)
