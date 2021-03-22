@@ -1,26 +1,26 @@
 import PropTypes from 'prop-types'
 
 import SuspenseBoundary from '../SuspenseBoundary'
-
+import Uploader from '../Uploader'
 import SimilaritySearch from '../SimilaritySearch'
 
 import AssetsContent from './Content'
 
 const Assets = ({ uploadedAssets, setUploadedAssets }) => {
   return (
-    <div className="w-screen max-w-screen-xl h-full">
+    <Uploader
+      uploadedAssets={uploadedAssets}
+      setUploadedAssets={setUploadedAssets}
+    >
       <SimilaritySearch
         uploadedAssets={uploadedAssets}
         setUploadedAssets={setUploadedAssets}
       />
 
       <SuspenseBoundary>
-        <AssetsContent
-          uploadedAssets={uploadedAssets}
-          setUploadedAssets={setUploadedAssets}
-        />
+        <AssetsContent uploadedAssets={uploadedAssets} />
       </SuspenseBoundary>
-    </div>
+    </Uploader>
   )
 }
 

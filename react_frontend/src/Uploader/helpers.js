@@ -4,7 +4,7 @@ const QUALITY = 0.8
 export const uploadAsset = ({ uploadedAssets, setUploadedAssets }) => async (
   event,
 ) => {
-  const file = event.target.files[0]
+  const file = event.dataTransfer.files[0]
 
   if (!file) return
 

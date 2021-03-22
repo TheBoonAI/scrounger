@@ -29,7 +29,15 @@ const SimilaritySearch = ({ uploadedAssets, setUploadedAssets }) => {
               src={dataURL}
               onClick={() => {
                 const { [fileName]: extract, ...rest } = uploadedAssets
+
                 setUploadedAssets(rest)
+
+                Router.push(
+                  `${pathname}${getQueryString({
+                    ...query,
+                    p: '',
+                  })}`,
+                )
               }}
             />
           )
