@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--max-http-header-size=2097152' next dev",
     "lint": "eslint '{pages,src}/**/*.js'",
     "start": "next start",
     "test": "jest --watch --notify --verbose --no-cache",

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import Router, { useRouter } from 'next/router'
 import useSWR from 'swr'
 
@@ -10,7 +11,7 @@ import AdobePremiereImport from '../AdobePremiereImport'
 
 export const ASSETS_PER_PAGE = 24
 
-const Assets = () => {
+const AssetsContent = ({ uploadedAssets }) => {
   const [assetIndex, setAssetIndex] = useState(-1)
 
   const {
@@ -26,6 +27,9 @@ const Assets = () => {
       text_search: q,
       media_type: t,
       similarity_search: s,
+      uploaded_assets: encodeURIComponent(
+        JSON.stringify(Object.values(uploadedAssets)),
+      ),
     })}`,
   )
 
@@ -169,4 +173,8 @@ const Assets = () => {
   )
 }
 
-export default Assets
+AssetsContent.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
+}
+
+export default AssetsContent

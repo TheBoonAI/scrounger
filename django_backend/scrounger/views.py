@@ -8,6 +8,8 @@ from django.http import JsonResponse, Http404, StreamingHttpResponse
 from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
+from urllib.parse import unquote
+from urllib.request import urlretrieve
 
 app = boonsdk.BoonApp(apikey=settings.BOONAI_API_KEY, server=settings.BOONAI_API_URL)
 
@@ -187,6 +189,17 @@ def search_view(request):
             simhashes.append(simhash)
         sim_query = boonsdk.SimilarityQuery(simhashes)
         must_queries.append(sim_query)
+
+    # Check for a query param containing uploaded assets for similarity search.
+    uploaded_assets_json = request.GET.get('uploaded_assets')
+    if uploaded_assets_json:
+        images = []
+        uploaded_assets = json.loads(unquote(uploaded_assets_json))
+        for uploaded_asset in uploaded_assets:
+            filepath, headers = urlretrieve(uploaded_asset)
+            images.append(filepath)
+        if images:
+            must_queries.append(app.assets.get_sim_query(images, min_score=0.6))
 
     # Filter by file type.
     media_type = request.GET.getlist('media_type')

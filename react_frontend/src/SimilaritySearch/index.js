@@ -1,17 +1,19 @@
+import PropTypes from 'prop-types'
 import Router, { useRouter } from 'next/router'
 
 import { getQueryString } from '../Query/helpers'
+import SimilaritySearchThumbnail from './Thumbnail'
 
-const SimilaritySearch = () => {
+const SimilaritySearch = ({ uploadedAssets, setUploadedAssets }) => {
   const {
     pathname,
     query,
-    query: { s },
+    query: { s = '' },
   } = useRouter()
 
-  if (!s) return null
+  if (!s && Object.keys(uploadedAssets).length === 0) return null
 
-  const similarityQuery = s.split(',')
+  const assetIds = s.split(',').filter(Boolean)
 
   return (
     <div className="px-2">
@@ -19,48 +21,57 @@ const SimilaritySearch = () => {
         Showing results similar to:
       </h3>
       <div className="flex py-2 border-b-2 border-gray-700">
-        {similarityQuery.map((assetId) => {
-          const newSimilarityQuery = similarityQuery
+        {Object.entries(uploadedAssets).map(([fileName, dataURL]) => {
+          return (
+            <SimilaritySearchThumbnail
+              key={fileName}
+              assetId={`uploaded asset ${fileName}`}
+              src={dataURL}
+              onClick={() => {
+                const { [fileName]: extract, ...rest } = uploadedAssets
+
+                setUploadedAssets(rest)
+
+                Router.push(
+                  `${pathname}${getQueryString({
+                    ...query,
+                    p: '',
+                  })}`,
+                )
+              }}
+            />
+          )
+        })}
+        {assetIds.map((assetId) => {
+          const similarityQuery = assetIds
             .filter((id) => id !== assetId)
             .join(',')
 
           return (
-            <div key={`similarity-${assetId}`} className="relative pr-2 group">
-              <img
-                className="h-20 sm:h-32 object-contain"
-                src={`/api/v1/assets/${assetId}/thumbnail_file`}
-                alt={`Similarity search item: ${assetId}`}
-              />
-
-              <button
-                type="button"
-                title="Remove from similarity search"
-                aria-label="Remove from similarity search"
-                className="absolute top-0 right-0 p-1 mt-1 mr-3 opacity-0 group-hover:opacity-100 group-focus:opacity-100 focus:opacity-100 rounded-full bg-gray-800 bg-opacity-75 hover:text-green-500 hover:bg-opacity-100"
-                onClick={() => {
-                  Router.push(
-                    `${pathname}${getQueryString({
-                      ...query,
-                      p: '',
-                      s: newSimilarityQuery,
-                    })}`,
-                  )
-                }}
-              >
-                <svg
-                  viewBox="0 0 20 20"
-                  className="h-5 stroke-current stroke-2"
-                >
-                  <line x1="5" y1="5" x2="15" y2="15" />
-                  <line x1="5" y1="15" x2="15" y2="5" />
-                </svg>
-              </button>
-            </div>
+            <SimilaritySearchThumbnail
+              key={`similarity-${assetId}`}
+              assetId={assetId}
+              src={`/api/v1/assets/${assetId}/thumbnail_file`}
+              onClick={() => {
+                Router.push(
+                  `${pathname}${getQueryString({
+                    ...query,
+                    p: '',
+                    s: similarityQuery,
+                  })}`,
+                )
+              }}
+            />
           )
         })}
       </div>
     </div>
   )
+}
+
+SimilaritySearch.propTypes = {
+  uploadedAssets: PropTypes.object.isRequired,
+  setUploadedAssets: PropTypes.func.isRequired,
 }
 
 export default SimilaritySearch
