@@ -1,16 +1,15 @@
 import json
-import base64
 from functools import wraps
 
 import boonsdk
 from django.conf import settings
 from django.contrib.auth import authenticate, logout, login
-from django.core.files.temp import NamedTemporaryFile
 from django.http import JsonResponse, Http404, StreamingHttpResponse
 from django.utils.cache import patch_response_headers, patch_cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from urllib.parse import unquote
+from urllib.request import urlretrieve
 
 app = boonsdk.BoonApp(apikey=settings.BOONAI_API_KEY, server=settings.BOONAI_API_URL)
 
@@ -197,12 +196,8 @@ def search_view(request):
         images = []
         uploaded_assets = json.loads(unquote(uploaded_assets_json))
         for uploaded_asset in uploaded_assets:
-            image_format, image_base64 = uploaded_asset.split(';base64,')
-            image_decoded = base64.b64decode(image_base64)
-            image_file = NamedTemporaryFile(suffix='jpeg', delete=False)
-            image_file.write(image_decoded)
-            image_file.flush()
-            images.append(image_file.name)
+            filepath, headers = urlretrieve(uploaded_asset)
+            images.append(filepath)
         if images:
             must_queries.append(app.assets.get_sim_query(images, min_score=0.6))
 
