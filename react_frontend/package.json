@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@cep/csinterface": "10.0.1",
-    "autoprefixer": "10.2.6",
+    "autoprefixer": "10.3.1",
     "next": "10.2.3",
     "postcss": "8.3.5",
     "prop-types": "15.7.2",
