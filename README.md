@@ -20,7 +20,7 @@ We suggest using Digital Ocean to get up and running with the
 least amount of friction. The deployment process tasks about 10 minutes and costs less
 than $20/month. Full instructions are at the link below.
 
-[Digital Ocean Deployment Instructions](https://docs.boonai.app/scrounger/)
+[Digital Ocean Deployment Instructions](documentation/deployment_instructions.pdf)
 
 ## On-Prem Deployment
 The following instructions are intended for an on-prem deployment used for testing and 
