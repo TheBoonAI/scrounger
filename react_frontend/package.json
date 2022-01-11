@@ -20,7 +20,7 @@
     "react-responsive-modal": "6.1.0",
     "react-use-clipboard": "1.0.7",
     "swr": "0.5.6",
-    "tailwindcss": "2.2.16"
+    "tailwindcss": "3.0.13"
   },
   "devDependencies": {
     "@testing-library/react": "12.1.1",
